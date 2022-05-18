@@ -1,0 +1,289 @@
+h.navbar-brand {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: x-large;
+}
+.tab-content {
+  padding-top: 15%;
+  padding-right: 25%;
+  padding-left: 25%;
+}
+
+.nav-pills {
+  /*position: fixed;*/
+}
+
+.nav-pills .nav-link.active {
+  background-color: #26a269;
+  color: #ffffff;
+}
+.nav-pills .nav-link {
+  color: #424242;
+}
+.btn-primary.btn-green {
+  background-color: #26a269;
+  border-color: #26a269;
+}
+.carrusel {
+  padding: 10%;
+}
+
+.tamimg {
+  display: table-cell;
+  height: 30%;
+  text-align: center;
+  width: 30%;
+  vertical-align: middle;
+  border-radius: 5px;
+}
+.carousel-caption {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  color: rgba(255, 255, 255, 1) !important;
+  text-align: center;
+  top: 70%;
+  bottom: 0%;
+  right: 10%;
+  left: 10%;
+  border-radius: 5px;
+}
+.form-label {
+  font-weight: bold;
+}
+
+.forum-col {
+  min-width: 256px;
+}
+
+.last-post-col {
+  min-width: 192px;
+}
+
+/*.ind{
+   
+    background-color: rgba(126, 126, 126, 0.351);
+    padding: 15px;
+}*/
+
+.forum {
+  background-color: #eeeeee;
+  color: rgb(66, 66, 66) !important;
+}
+.textolado {
+  font-size: small;
+}
+
+.tpading {
+  padding-top: 7%;
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 5%;
+    white-space: nowrap;
+  }
+}
+
+.carousel-inner > .carousel-item > .carousel-caption > h5,
+.carousel-inner > .carousel-item > .carousel-caption > p {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.carousel-caption {
+  position: absolute;
+  right: 0%;
+  top: 35%; /* Cambiar bottom por top y los píxeles que necesites */
+  left: 0%;
+  z-index: 0;
+  padding-top: 35%;
+  padding-bottom: 15%;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Añadir para conseguir el fondo con opacidad */
+}
+
+#carrusel-index {
+  width: 90%;
+  margin-left: 0%;
+  margin-top: 2%;
+  margin-right: 20% !important;
+}
+
+.carousel-caption {
+  top: 15%;
+  bottom: auto;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* Con estos, las tablas mantienen cierto tamaño aún luego de minimizar al máximo la página */
+#first-forum-col {
+  min-width: 16em;
+}
+
+#last-post-col {
+  min-width: 12em;
+}
+
+#nuevopost {
+  padding: 5px 0px 5px 10px;
+  margin-top: 1%;
+  max-width: 90%;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-color: #b2b6ba;
+  border-width: 1px;
+}
+#fondo {
+  background-color: #ffffff;
+}
+#crearpostAnime {
+  color: #26a269;
+  background-color: #ffffff;
+}
+#imagen-anime {
+  max-width: 100%;
+}
+
+.postear {
+  background-color: #ffffff;
+  color: #121212;
+  padding: 1%;
+  text-align: center;
+  border-radius: 5px;
+  font-size: medium;
+}
+
+#h-estilo1 {
+  font-size: x-small;
+}
+#h-estilo2 {
+  font-size: small;
+}
+
+#sdaflkje3 {
+  font-family: Noto Sans, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+/* Styles que van en Crearpost.html */
+.btn-large {
+  margin: 2%;
+  font-size: 120%;
+}
+
+.form-post {
+  background-color: #5d646b;
+  border-radius: 2%;
+  padding: 2%;
+}
+
+.label-post {
+  color: #ffffff;
+  font-size: 125%;
+  padding: 0.5%;
+}
+.h1-titulo {
+  padding-left: 50px;
+}
+
+.input-post {
+  padding: 1%;
+}
+.redondear {
+  background-color: #ffffff;
+  margin-top: 25px;
+  border-radius: 15px;
+}
+/*----------------------------*/
+
+.author-col {
+  min-width: 12em !important;
+}
+
+.post-col {
+  min-width: 20em !important;
+}
+#comment {
+  min-width: 20em !important;
+}
+
+#clima {
+  color: #ffffff;
+  padding: 3% !important;
+  margin-top: 5%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 5%;
+  font-size: 140%;
+  font-family: "Josefin Sans", sans-serif;
+  border-radius: 10%;
+  background-color: #26a269;
+}
+
+#tabla-post{
+  width: 75%;
+  background-color: #f3f3f3 !important;
+  border-right: 3px solid rgba(141, 141, 141, 0.383);
+
+  border-left: 3px solid rgba(141, 141, 141, 0.383);
+
+
+}
+
+#ajustesTabla{
+
+  border-right: 1px solid rgba(58, 58, 58, 0.383);
+  border-bottom: 2px solid rgba(58, 58, 58, 0.383);
+  border-left: 1px solid rgba(58, 58, 58, 0.383);
+  border-top: 1px solid rgba(58, 58, 58, 0.383);
+  background-color: rgba(222, 222, 222, 0.51);
+
+}
+#titulo-carta{
+  background-color: #26a269 !important;
+  text-align: center !important;
+  color: #ffffff;
+  border-radius: 3px 3px 0px 0px;
+}
+
