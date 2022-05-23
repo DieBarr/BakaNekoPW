@@ -4,5 +4,4 @@ from django.shortcuts import render
 def index(request):
     return render(request,'bakaNeko/index.html')
 
-def perfil(request):
-    return render(request, 'bakaNeko/perfil.html')
+
