@@ -1,15 +1,18 @@
+from pyexpat import model
 from tabnanny import verbose
 from django.db import models
 
 # Create your models here.
-
+class Rol(models.Model):
+    idRol = models.AutoField(primary_key=True,verbose_name="Codigo rol")
+    nombreRol = models.CharField(max_length=30,verbose_name="Nombre rol")
 class Usuario(models.Model):
     idUsuario = models.AutoField(primary_key=True, verbose_name="Codigo de Usuario")
     nombreUsuario = models.CharField(max_length=30, verbose_name="Nombre de Usuario")
     contrasenia = models.CharField(max_length=20, verbose_name="Contraseña del Usuario")
     email = models.EmailField(max_length=30, verbose_name="Correo del Usuario")
-    foto_perfil = models.ImageField(upload_to="fotoPerfiles", null=True)
-    tipo_user = models.CharField(max_length=5, verbose_name="Tipo de Usuario") # Admin | Comun | Mod
+    fotoUsuario = models.ImageField(upload_to="fotoPerfiles", null=True)
+    rol = models.ForeignKey(Rol)
 
 class Estado(models.Model):
     idStatus = models.AutoField(primary_key=True, verbose_name="Codigo de Status")
