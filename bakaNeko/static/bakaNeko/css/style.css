@@ -286,4 +286,62 @@ h.navbar-brand {
   color: #ffffff;
   border-radius: 3px 3px 0px 0px;
 }
+/* Inicio ajustes Cards */
+#card-ajustes{
+  width: 100%;
+}
 
+#imgcar{
+  min-width: 300px;
+  min-height: 325px;
+  
+}
+
+#minifoto-card{
+  max-width: 21px;
+  max-height: 21px;
+  border-radius: 50%;
+  margin-bottom: auto;
+}
+
+#titulo-card{
+  font-size: small;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+#titulo-card-2{
+  font-size: small;
+  color: gray;
+  opacity: 0.9;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+#titulo-card-3{
+  font-size: x-small;
+  color: gray;
+  opacity: 0.9;
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
+#titulo-nombreuser{
+  font-size: small;
+  margin-top: 5px;
+  margin-left: 2px;
+
+}
+
+#footer-card{
+  font-size: small;
+  color: gray;
+  opacity: 0.9;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+#texto-card{
+  font-family: "SF Pro Text","Myriad Set Pro","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+  font-weight: bold;
+}
