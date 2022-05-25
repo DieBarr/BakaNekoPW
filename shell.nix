@@ -7,6 +7,8 @@ let
     pandas
     requests
     django
+    cx_oracle
+    pillow
     # other python packages you want
   ]);
 in
