@@ -16,7 +16,7 @@ class Usuario(models.Model):
     rol = models.ForeignKey(Rol, on_delete=models.SET_DEFAULT, default="sinRol")
 
 class Estado(models.Model):
-    idStatus = models.AutoField(primary_key=True, verbose_name="Codigo de Status")
+    idEstado = models.AutoField(primary_key=True, verbose_name="Codigo de Status")
     nombre = models.CharField(max_length=30, verbose_name="Tipo de status")
 
 class Post(models.Model):
