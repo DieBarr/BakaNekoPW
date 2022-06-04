@@ -1,7 +1,10 @@
+
+{% load static %}
+{% block barraNav %}
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
     <img
-      src="resources/bakaNeko.svg"
+      src="{% static 'bakaNeko/resources/bakaNeko.svg' %}"
       class="d-inline-block aling-top"
       width="30"
       height="30"
@@ -43,6 +46,5 @@
     </div>
   </div>
 </nav>
+{% endblock barraNav %} 
 
-<script src="js/script.js"></script>
-<script src="js/navScripts.js"></script>
