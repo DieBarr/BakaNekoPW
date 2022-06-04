@@ -25,11 +25,12 @@
 </head>
 
 <body>
-  <!-------NavBar-->
-  <div id="nav-placeholder">
-  </div>
- <div class="main-content">
 
+  {% include 'bakaNeko/includes/barraNav.html' %}
+
+  {% block barraNav %}
+  
+  {% endblock barraNav %} 
     <!-- ******Carousel******  -->
     <div class="container-fluid-center">
       <div class="row">
