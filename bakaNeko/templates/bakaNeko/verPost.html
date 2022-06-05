@@ -81,7 +81,9 @@
                         <p>
                           {{ post.descPost }}
                         </p>
+                        {% if post.imagenPost %}
                         <img src="{{ post.imagenPost.url}}">
+                        {% endif %}
                       </td>
                     </tr>
                   </tbody>
