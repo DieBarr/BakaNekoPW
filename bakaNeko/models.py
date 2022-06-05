@@ -37,4 +37,3 @@ class Comentario(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.SET_DEFAULT, default="Activo")
     razonCom = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
     descCom = models.CharField(max_length=400, verbose_name="Contenido del comentario")
-

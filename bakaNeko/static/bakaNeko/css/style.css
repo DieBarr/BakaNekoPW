@@ -345,3 +345,7 @@ h.navbar-brand {
   font-family: "SF Pro Text","Myriad Set Pro","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
   font-weight: bold;
 }
+.tab {
+  display: inline-block;
+  margin-left: 10%;
+}

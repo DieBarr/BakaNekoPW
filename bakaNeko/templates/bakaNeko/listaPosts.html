@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lista de Posts</title>
     <!-- a -->
     <!--Stylesheets-->
     <!-- Bootsrap-->
@@ -52,7 +52,7 @@
                         </li>
                     </ul>
                 </div>
-                <h2 id="texto-card" class="ps-1">{{ p.tituloPost }}</h2>
+                <a href="{% url 'verPosts' p.idPost %}"><h2 id="texto-card" class="ps-1">{{ p.tituloPost }}</h2></a>
                 <h6 id="texto-card" class="ps-1">{{ p.descPost }}</h6>
 
                 <img class="card-img-top" id="imgcard" src="{{ p.imagenPost.url }}" alt="No imagen" style="padding: 5%;">
@@ -65,6 +65,9 @@
                         <li class="nav-item"><h1 id="footer-card"><a href="#" style="text-decoration: none; color: gray;">23 Comentarios</a></h1></li>
                     </ul>
                 </div>
+                <form method="POST">
+
+                </form>
                 {% for c in comentario %}
                     {% if c.post.idPost == p.idPost %}
                     <div class="row" style="padding-top: 5%;">
