@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from .models import Usuario, Rol, Post, Comentario, Estado
 from django.contrib import messages
 import datetime
-
-# Create your views here.
 def index(request):
-    return render(request,'bakaNeko/index.html')
+
+    posts = Post.objects.all()
+    coments = Comentario.objects.all()
+    contexto = {"post":posts, "comentario":coments}
+    return render(request,'bakaNeko/index.html',contexto)
 
 def lista(request):
     posts = Post.objects.all()
