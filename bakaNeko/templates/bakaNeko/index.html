@@ -33,6 +33,11 @@
   {% endblock barraNav %} 
   {% block post %}
     <!-- ******Carousel******  -->
+    {% if messages %}
+        {% for i in messages %}
+        <p><div class='alert alert-success' role='alert'>{{ i }}</div></p>
+        {% endfor %}
+    {% endif %}
     <div class="container-fluid-center">
       <div class="row">
         <div class="col-md-2"></div>
@@ -180,12 +185,12 @@
                         </h1>
                         <ul class="nav nav-pills pb-1 nav-fill sss">
                           <li class="nav-item">
-                            <a class="nav-link active _pill1" href="sesionRegistro.html">Registrarse</a>
+                            <a class="nav-link active _pill1" href="{% url 'registro' %}">Registrarse</a>
                           </li>
                         </ul>
                         <ul class="nav nav-pills pb-1 nav-fill">
                           <li class="nav-item">
-                            <a class="nav-link active" href="nuevoPost.html">Nuevo Post</a>
+                            <a class="nav-link active" href="{% url 'nuevoPost' %}">Nuevo Post</a>
                           </li>
                         </ul>
           
