@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, registrar, secanime, secjuegos, login
+from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, registrar, secanime, secjuegos, login, \
+    secanimeAdm, secjuegosAdm
 
 
 urlpatterns = [
@@ -30,4 +31,6 @@ urlpatterns = [
     path('publicar/<str:user>', registrarPost, name="registrarPost"),
     path('secAnime/', secanime, name='secAnime'),
     path('secVideojuegos/', secjuegos, name='secJuegos'),
+    path('Admin/secAnimeAdm/', secanimeAdm, name='secAnimeAdm'),
+    path('Admin/secVideojuegosAdm/', secjuegosAdm, name='secJuegosAdm'),
 ]

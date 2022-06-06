@@ -124,3 +124,22 @@ def secjuegos(request):
 
 
     return render(request,'bakaNeko/secVideojuegos.html', datos2)
+
+def secanimeAdm(request):
+    posts = Post.objects.all()
+
+    datos = {
+    'posts' : posts
+    }
+    return render(request,'bakaNeko/Admin/secAnimeAdm.html', datos)
+
+def secjuegosAdm(request):
+    
+    posts = Post.objects.all()
+
+    datos2 = {
+    'posts' : posts
+    }
+
+
+    return render(request,'bakaNeko/Admin/secVideojuegosAdm.html', datos2)

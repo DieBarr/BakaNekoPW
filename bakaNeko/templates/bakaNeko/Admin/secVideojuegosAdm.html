@@ -30,11 +30,10 @@
   {% block barraNav %}
 
   {% endblock barraNav %}
- <div class="main-content">
      <!-- ******Imagen Anime**** -->
     <div>
         <img
-          src="{% static 'bakaNeko/resources/images/foto-anime.jpg' %}"
+          src="{% static 'bakaNeko/resources/images/foto-videojuego.jpg' %}"
           alt="anime"
           id="imagen-anime"
         />
@@ -78,13 +77,13 @@
       <div class="row">
           <div class="col-2"></div>
           <div class="col-8 col-lg-4 col-md-6">
-              {% for p in posts %}
+              {% for post in posts %}
               <!--Post 1-->
               <div class="card mb-2" id="card-ajustes">
                   <div class="card-header">
                       <ul class="nav">
                           <li class="nav-item">
-                              <img src="{{p.usuario.fotoUsuario}}" id="minifoto-card" alt="Gato">
+                              <img src="{{post.usuario.fotoUsuario}}" id="minifoto-card" alt="Gato">
                           </li>
                           <li class="nav-item">
                               <h1 id="titulo-card">Anime</h1>
@@ -97,19 +96,94 @@
                               <h1 id="titulo-card-2">posteado por:</h1>
                           </li>
                           <li class="nav-item">
-                              <h1 id="titulo-nombreuser"><a href="#" style="text-decoration: none; color: rgb(56, 56, 56);">{{p.usuario.nombreUsuario}}</a></h1>
+                              <h1 id="titulo-nombreuser"><a href="#" style="text-decoration: none; color: rgb(56, 56, 56);">{{post.usuario.nombreUsuario}}</a></h1>
                           </li>
                           <li class="nav-item">
-                              <h1 id="titulo-card-3">{{p.fechaPost}}</h1>
+                              <h1 id="titulo-card-3">hace 2 semanas</h1>
                           </li>
                       </ul>
                   </div>
-                  <a href="{% url 'verPosts' p.idPost %}"><h5 id="texto-card" class="ps-1">{{ p.tituloPost }}</h5></a>
-                  {% if p.imagenPost %}
-                    <a href="{{ p.imagenPost.url }}"><img class="card-img-top" id="imgcard" src="{{ p.imagenPost.url }}" alt="No imagen"></a>
-                  {% else %}
-                    <p>{{ p.descPost }}</p>
-                  {% endif %}
+                  <h6 id="texto-card" class="ps-1">{{post.descPost}}</h6>
+
+                  <img class="card-img-top" id="imgcard" src="{{post.imagenPos}}" alt="No imagen">
+
+                  <div>
+                      <ul class="nav ms-2 mr-1">
+                          <li><a href="#" style="text-decoration: none; color: gray;"><svg xmlns="http://www.w3.org/2000/svg" style="color: gray;" width="16" height="16" fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
+                              <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            </svg></a></li>
+                          <li class="nav-item"><h1 id="footer-card"><a href="#" style="text-decoration: none; color: gray;">23 Comentarios</a></h1></li>
+                      </ul>
+                  </div>
+              </div>
+
+              <!--Post 2-->
+
+              <div class="card mb-2" id="card-ajustes">
+                  <div class="card-header">
+                      <ul class="nav">
+                          <li class="nav-item">
+                              <img src="{{post.usuario.fotoUsuario}}" id="minifoto-card" alt="Gato">
+                          </li>
+                          <li class="nav-item">
+                              <h1 id="titulo-card">Anime</h1>
+                          </li>
+                          <li class="nav-item">
+                              <h1 class="mt-1 ms-2" style="font-size: small; color: gray;">~</h1>
+                          </li>
+
+                          <li class="nav-item">
+                              <h1 id="titulo-card-2">posteado por:</h1>
+                          </li>
+                          <li class="nav-item">
+                              <h1 id="titulo-nombreuser"><a href="#" style="text-decoration: none; color: rgb(56, 56, 56);">{{post.usuario.nombreUsuario}}</a></h1>
+                          </li>
+                          <li class="nav-item">
+                              <h1 id="titulo-card-3">hace 2 semanas</h1>
+                          </li>
+                      </ul>
+                  </div>
+                  <h6 id="texto-card" class="ps-1">{{post.descPost}}</h6>
+
+                  <img class="card-img-top" id="imgcard" src="{{post.imagenPos}}" alt="No imagen">
+
+                  <div>
+                      <ul class="nav ms-2 mr-1">
+                          <li><a href="#" style="text-decoration: none; color: gray;"><svg xmlns="http://www.w3.org/2000/svg" style="color: gray;" width="16" height="16" fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
+                              <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            </svg></a></li>
+                          <li class="nav-item"><h1 id="footer-card"><a href="#" style="text-decoration: none; color: gray;">23 Comentarios</a></h1></li>
+                      </ul>
+                  </div>
+              </div>
+              <!--Post 3-->
+              <div class="card mb-2" id="card-ajustes">
+                  <div class="card-header">
+                      <ul class="nav">
+                          <li class="nav-item">
+                              <img src="{{post.usuario.fotoUsuario}}" id="minifoto-card" alt="Gato">
+                          </li>
+                          <li class="nav-item">
+                              <h1 id="titulo-card">Anime</h1>
+                          </li>
+                          <li class="nav-item">
+                              <h1 class="mt-1 ms-2" style="font-size: small; color: gray;">~</h1>
+                          </li>
+
+                          <li class="nav-item">
+                              <h1 id="titulo-card-2">posteado por:</h1>
+                          </li>
+                          <li class="nav-item">
+                              <h1 id="titulo-nombreuser"><a href="#" style="text-decoration: none; color: rgb(56, 56, 56);">{{post.usuario.nombreUsuario}}</a></h1>
+                          </li>
+                          <li class="nav-item">
+                              <h1 id="titulo-card-3">hace 2 semanas</h1>
+                          </li>
+                      </ul>
+                  </div>
+                  <h6 id="texto-card" class="ps-1">{{post.descPost}}</h6>
+
+                  <img class="card-img-top" id="imgcard" src="{{post.imagenPos}}" alt="No imagen">
 
                   <div>
                       <ul class="nav ms-2 mr-1">
