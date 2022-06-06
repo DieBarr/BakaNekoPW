@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost,\
-secanime, secjuegos
+from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, registrar, secanime, secjuegos, login
 
 
 urlpatterns = [

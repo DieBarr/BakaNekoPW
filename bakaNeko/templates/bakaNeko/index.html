@@ -137,13 +137,8 @@
               <a class="nav-link" data-bs-toggle="pill" href="#top">Top</a>
             </li>
             <li class="nav-item">
-<<<<<<< HEAD
               <a class="nav-link" href="{% url 'nuevoPost' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="#26a269" class="bi bi-plus-square" viewBox="0 0 16 16">
-=======
-              <a class="nav-link" href="nuevoPost.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  fill="#26a269" class="bi bi-plus-square" viewBox="0 0 16 16">
->>>>>>> main
                   <path
                     d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
                   </path>
@@ -154,7 +149,6 @@
             </li>
 
           </ul>
-<<<<<<< HEAD
               <!--********POSTS*********-->
     <div class="container-fluid-center">
       <div class="row">
@@ -196,53 +190,6 @@
                       <ul class="nav ms-2 mr-1">
                           <li><a href="#" style="text-decoration: none; color: gray;"><svg xmlns="http://www.w3.org/2000/svg" style="color: gray;" width="16" height="16" fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
                               <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-=======
-          <!--********POSTS*********-->
-
-
-          <div class="container-fluid-center">
-            <div class="row">
-
-              <!--Post 1-->
-              <div class="tab-content p-5" id="nav-tabContent">
-                <div class="tab-pane active" id="hot">
-                  {% for p in post %}
-                  <div class="card mb-2" id="card-ajustes">
-                    <div class="card-header">
-                      <a href="{% url 'verPosts' p.idPost %}">
-                        <h2 id="texto-card" class="ps-1">{{ p.tituloPost }}</h2>
-                      </a>
-
-                    </div>
-
-
-                    {% if p.imagenPost == '' %}
-                    <div class="container" id="caja_imgpost">
-                      <h6 id="texto-card" class="ps-1">{{ p.descPost }}</h6>
-                      {% else %}
-                      <img class="card-img-top" id="imgpost" src="{{ p.imagenPost.url }}" alt="No imagen">
-
-
-
-                      {% endif %}
-
-
-
-
-
-                    </div>
-
-
-
-                    <div>
-
-                      <ul class="nav">
-                        <li><a href="#" style="text-decoration: none; color: gray;"><svg
-                              xmlns="http://www.w3.org/2000/svg" style="color: gray;" width="16" height="16"
-                              fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
-                              <path
-                                d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
->>>>>>> main
                             </svg></a></li>
                         <li class="nav-item">
                           <h1 id="footer-card"><a href="#" style="text-decoration: none; color: gray;">23
@@ -281,15 +228,12 @@
 
                   </div>
                   {% endfor %}
-
+                  {% endblock post %}
 
                 </div>
 
 
-              </div>
-<<<<<<< HEAD
-              {% endfor %}
-            </div>
+            
           <!--********TABLA DEL LADO*********-->
             <div class="col-md-1"></div>
           <div class="col-md-3 col-sm-12 tpading">
@@ -370,19 +314,7 @@
               </aside>
             </div>
             <!--FIN TABLA DEL LADO-->
-            {% endblock post %}
-=======
-
-
-
-
-
-
-            </div>
-          </div>
-
-
->>>>>>> main
+           
 
 
 
