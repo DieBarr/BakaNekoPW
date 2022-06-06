@@ -9,6 +9,10 @@ def index(request):
     contexto = {"postCarr":posts_car, "post":posts_i}
     return render(request,'bakaNeko/index.html', contexto)
 
+def index_l(request, user):
+    usuario = user
+    contexto = {"user":usuario}
+    return render(request, 'bakaNeko/index.html', contexto)
 
 def lista(request):
     posts = Post.objects.all()
@@ -35,6 +39,7 @@ def registrar(request):
     elif u_contrasenia != u_repcontra:
         messages.error(request, "Las contraseñas no coinciden ٩(╬ʘ益ʘ╬)۶ !")
         return redirect('registro')
+
     ##insert
     Usuario.objects.create(nombreUsuario = u_nombre, email = u_email, fotoUsuario = u_foto, contrasenia = u_contrasenia, rol = rol_u)
     return redirect('registro')
@@ -42,17 +47,18 @@ def registrar(request):
 def login(request):
     nombre_l = request.POST['nomLogin']
     contra_l = request.POST['contraLogin']
-    try:
-        usuario_l = Usuario.objects.get(nombreUsuario = nombre_l)
-        if usuario_l.contrasenia == contra_l:
-            messages.success(request, "Bienvenido "+usuario_l.nombreUsuario+" ☆*:.｡.o(≧▽≦)o.｡.:*☆!!!")
-            return redirect('index')
-        else:
-            messages.error(request, "La contraseña no es válida (＃`Д´)!!")
-            return redirect('registro')
-    except:
-        messages.error(request, "El usuario no existe, se sugiere crear uno (╬ Ò﹏Ó)")
+   # try:
+    usuario_l = Usuario.objects.get(nombreUsuario = nombre_l)
+    contexto = {"user": usuario_l}
+    if usuario_l.contrasenia == contra_l:
+        messages.success(request, "Bienvenido "+usuario_l.nombreUsuario+" ☆*:.｡.o(≧▽≦)o.｡.:*☆!!!")
+        return render(request, 'bakaNeko/index.html', contexto)
+    else:
+        messages.error(request, "La contraseña no es válida (＃`Д´)!!")
         return redirect('registro')
+    #except:
+     #   messages.error(request, "El usuario no existe, se sugiere crear uno (╬ Ò﹏Ó)")
+      #  return redirect('registro')
 
 
 def verPost(request, id):
