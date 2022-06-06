@@ -5,7 +5,10 @@ import datetime
 
 # Create your views here.
 def index(request):
-    return render(request,'bakaNeko/index.html')
+    posts_car = Post.objects.filter(fechaPost = datetime.date.today())
+    posts_i = Post.objects.all()
+    contexto = {"postCarr":posts_car, "post":posts_i}
+    return render(request,'bakaNeko/index.html', contexto)
 
 def lista(request):
     posts = Post.objects.all()
@@ -56,13 +59,13 @@ def registrarPost(request, user):
             est_p = Estado.objects.get(nombre="activo")
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p)
             messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('listaPosts')
+            return redirect('index')
         except:
             usuario_p = Usuario.objects.get(nombreUsuario = user)
             est_p = Estado.objects.get(nombre="activo")
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p)
             messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('listaPosts')
+            return redirect('index')
 
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']

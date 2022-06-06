@@ -349,3 +349,13 @@ h.navbar-brand {
   display: inline-block;
   margin-left: 10%;
 }
+
+.carrImg{
+  width: 150px;
+  height: 440px;
+  overflow: hidden;
+}
+
+.carrImg img{
+  margin: -10px 0px 0px -180px;
+}
