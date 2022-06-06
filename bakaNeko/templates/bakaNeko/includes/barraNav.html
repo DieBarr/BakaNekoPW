@@ -24,6 +24,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        {% if user %}
+        <li class="nav-item">
+          {{ user.nombreUsuario }}
+        </li>
+        <li class="nav-item">
+          <a href="nav-link" href="{% url 'index' %}">Cerrar Sesión</a>
+        </li>
+        {% else %}
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{% url 'registro' %}"
             >Iniciar sesión</a
@@ -31,8 +40,10 @@
         </li>
         <li class="nav-item">
           <!DOCTYPE html>
-          <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
+          <a class="nav-link" aria-current="page" href="{% url 'registro' %}">
+            Registrarse</a>
         </li>
+        {% endif %}
       </ul>
       <form class="d-flex">
         <input
