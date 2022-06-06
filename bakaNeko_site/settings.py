@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bakaNeko',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

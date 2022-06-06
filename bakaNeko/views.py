@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect
 from .models import Usuario, Rol, Post, Comentario, Estado
 from django.contrib import messages
 import datetime
-
-# Create your views here.
 def index(request):
+
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
     posts_i = Post.objects.all()
     contexto = {"postCarr":posts_car, "post":posts_i}
     return render(request,'bakaNeko/index.html', contexto)
+
 
 def lista(request):
     posts = Post.objects.all()
@@ -105,3 +105,22 @@ def registrarComentario(request, id, user):
     messages.success(request, "Comentario creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
 
     return redirect('verPosts', id)
+
+def secanime(request):
+    posts = Post.objects.all()
+
+    datos = {
+    'posts' : posts
+    }
+    return render(request,'bakaNeko/secAnime.html', datos)
+
+def secjuegos(request):
+    
+    posts = Post.objects.all()
+
+    datos2 = {
+    'posts' : posts
+    }
+
+
+    return render(request,'bakaNeko/secVideojuegos.html', datos2)

@@ -1,7 +1,9 @@
 from pyexpat import model
 from tabnanny import verbose
-from tkinter import CASCADE
+
 from django.db import models
+
+
 
 # Create your models here.
 class Rol(models.Model):
@@ -22,11 +24,12 @@ class Estado(models.Model):
     idEstado = models.AutoField(primary_key=True, verbose_name="Codigo de Status")
     nombre = models.CharField(max_length=30, verbose_name="Tipo de status")
 
-class Post(models.Model):
+class Post(models.Model): 
     idPost = models.AutoField(primary_key=True, verbose_name="Codigo del Post")
     fechaPost = models.DateField(verbose_name="Fecha del Post")
     tituloPost = models.CharField(max_length=150, verbose_name="Titulo del Post")
     descPost = models.CharField(max_length=500, verbose_name="Descripcion del Post")
+
     imagenPost = models.ImageField(upload_to="imagenPosts", blank=True, null=True)
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
     razonPost = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
