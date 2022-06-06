@@ -10,8 +10,14 @@ def index(request):
     return render(request,'bakaNeko/index.html', contexto)
 
 def index_l(request, user):
-    usuario = user
-    contexto = {"user":usuario}
+    posts_car = Post.objects.filter(fechaPost = datetime.date.today())
+    posts_i = Post.objects.all()
+    usuario = Usuario.objects.get(idUsuario = user)
+    contexto = {
+        "user":usuario,
+        "postCarr":posts_car,
+        "post":posts_i
+    }
     return render(request, 'bakaNeko/index.html', contexto)
 
 def lista(request):
@@ -73,9 +79,13 @@ def verPost(request, id):
 
     return render(request, 'bakaNeko/verPost.html', contexto)
 
-def nuevoPost(request):
+def nuevoPost(request, user):
+    usuario_p = Usuario.objects.get(idUsuario = user)
     tipos = Tipo.objects.all()
-    contexto = {"tipo":tipos}
+    contexto = {
+        "tipo":tipos,
+        "user":usuario_p
+    }
     return render(request, 'bakaNeko/nuevoPost.html', contexto)
 
 def registrarPost(request, user):
@@ -85,21 +95,22 @@ def registrarPost(request, user):
     desc_p = request.POST['descPost']
     tipo_p = request.POST['tipoSel']
     tipo_p2 = Tipo.objects.get(idTipo = tipo_p)
-    usuario_p = Usuario.objects.get(nombreUsuario = user)
+    usuario_p = Usuario.objects.get(idUsuario = user)
     est_p = Estado.objects.get(nombre="activo")
     if len(titulo_p) > 100:
         messages.error(request, "Error: El Asunto no puede tener más de 100 caracteres (╬ Ò﹏Ó)!")
-        return redirect('nuevoPost')
+        return redirect('nuevoPost', usuario_p)
     else:
         try:
             img_p = request.FILES['imgPost']
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p, tipo=tipo_p2)
             messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('index')
+            contexto = {"user":usuario_p}
+            return render(request, 'bakaNeko/index.html', contexto)
         except:
-            Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p,  tipo=tipo_p)
+            Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p,  tipo=tipo_p2)
             messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('index')
+            return render(request, 'bakaNeko/index.html', contexto)
 
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']
