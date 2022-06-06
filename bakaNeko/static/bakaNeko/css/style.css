@@ -7,11 +7,6 @@ h.navbar-brand {
   padding-right: 25%;
   padding-left: 25%;
 }
-
-.nav-pills {
-  /*position: fixed;*/
-}
-
 .nav-pills .nav-link.active {
   background-color: #26a269;
   color: #ffffff;
@@ -22,9 +17,6 @@ h.navbar-brand {
 .btn-primary.btn-green {
   background-color: #26a269;
   border-color: #26a269;
-}
-.carrusel {
-  padding: 10%;
 }
 
 .tamimg {
@@ -252,8 +244,8 @@ h.navbar-brand {
   color: #ffffff;
   padding: 3% !important;
   margin-top: 5%;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-bottom: 5%;
   font-size: 140%;
   font-family: "Josefin Sans", sans-serif;
@@ -287,16 +279,6 @@ h.navbar-brand {
   border-radius: 3px 3px 0px 0px;
 }
 /* Inicio ajustes Cards */
-#card-ajustes{
-  width: 100%;
-}
-
-#imgcar{
-  min-width: 300px;
-  min-height: 325px;
-  
-}
-
 #minifoto-card{
   max-width: 21px;
   max-height: 21px;
@@ -305,26 +287,13 @@ h.navbar-brand {
 }
 
 #titulo-card{
-  font-size: small;
+  color:#26a269 !important;
+  font-size: 175%;
+  font-weight: bold;
   margin-left: 10px;
   margin-top: 5px;
 }
 
-#titulo-card-2{
-  font-size: small;
-  color: gray;
-  opacity: 0.9;
-  margin-left: 10px;
-  margin-top: 5px;
-}
-
-#titulo-card-3{
-  font-size: x-small;
-  color: gray;
-  opacity: 0.9;
-  margin-left: 5px;
-  margin-top: 8px;
-}
 
 #titulo-nombreuser{
   font-size: small;
@@ -335,17 +304,47 @@ h.navbar-brand {
 
 #footer-card{
   font-size: small;
-  color: gray;
-  opacity: 0.9;
+
   margin-left: 5px;
   margin-top: 5px;
 }
 
 #texto-card{
-  font-family: "SF Pro Text","Myriad Set Pro","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+  font-family: sans-serif;
   font-weight: bold;
 }
 .tab {
   display: inline-block;
   margin-left: 10%;
+}
+
+.espaciador{
+  margin-left: auto;
+  margin-right: auto;
+
+
+
+}
+.imgpost{
+  width: 40%;
+  height: auto;
+  
+}
+#caja_imgpost{
+  padding-left:10%;
+  padding-right: 10%;
+  width: 40%;
+  height: auto;
+
+}
+#card-ajustes{  
+  border-radius: 25px;
+  max-width: 70%;
+
+    
+}
+
+#subtexto-card{
+
+  font-size: small;
 }
