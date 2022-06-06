@@ -4,10 +4,11 @@ from django.contrib import messages
 import datetime
 def index(request):
 
-    posts = Post.objects.all()
-    coments = Comentario.objects.all()
-    contexto = {"post":posts, "comentario":coments}
-    return render(request,'bakaNeko/index.html',contexto)
+    posts_car = Post.objects.filter(fechaPost = datetime.date.today())
+    posts_i = Post.objects.all()
+    contexto = {"postCarr":posts_car, "post":posts_i}
+    return render(request,'bakaNeko/index.html', contexto)
+
 
 def lista(request):
     posts = Post.objects.all()
@@ -19,14 +20,40 @@ def registro(request):
     return render(request,'bakaNeko/registro.html')
   
 def registrar(request):
-    u_nombre = request.POST['usuario']
-    u_email = request.POST['correo']
-    u_contrasenia = request.POST['contrasenia']
-    u_rol = request.POST['rol']
-    rol_u = Rol.objects.get(id_rol = u_rol)
+    u_nombre = request.POST['nomUsuario']
+    u_email = request.POST['correoUsuario']
+    u_foto = request.FILES['fotoPerfil']
+    u_contrasenia = request.POST['contraUsuario']
+    u_repcontra = request.POST['repetirContra']
+    rol_u = Rol.objects.get(nombreRol = 'usuario')
+    ##regexEmail = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/"
+    ##regexPassword = "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/"
+
+    if (len(u_nombre) < 4 and len(u_nombre) > 12):
+        messages.error(request, "El nombre de usuario no es válido (＃`Д´) !")
+        return redirect('registro')
+    elif u_contrasenia != u_repcontra:
+        messages.error(request, "Las contraseñas no coinciden ٩(╬ʘ益ʘ╬)۶ !")
+        return redirect('registro')
     ##insert
-    Usuario.objects.create(nombreUsuario = u_nombre, email = u_email, contrasenia = u_contrasenia, rol = u_rol)
-    return redirect('index')
+    Usuario.objects.create(nombreUsuario = u_nombre, email = u_email, fotoUsuario = u_foto, contrasenia = u_contrasenia, rol = rol_u)
+    return redirect('registro')
+
+def login(request):
+    nombre_l = request.POST['nomLogin']
+    contra_l = request.POST['contraLogin']
+    try:
+        usuario_l = Usuario.objects.get(nombreUsuario = nombre_l)
+        if usuario_l.contrasenia == contra_l:
+            messages.success(request, "Bienvenido "+usuario_l.nombreUsuario+" ☆*:.｡.o(≧▽≦)o.｡.:*☆!!!")
+            return redirect('index')
+        else:
+            messages.error(request, "La contraseña no es válida (＃`Д´)!!")
+            return redirect('registro')
+    except:
+        messages.error(request, "El usuario no existe, se sugiere crear uno (╬ Ò﹏Ó)")
+        return redirect('registro')
+
 
 def verPost(request, id):
     postSel = Post.objects.get(idPost = id)
@@ -58,13 +85,13 @@ def registrarPost(request, user):
             est_p = Estado.objects.get(nombre="activo")
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p)
             messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('listaPosts')
+            return redirect('index')
         except:
             usuario_p = Usuario.objects.get(nombreUsuario = user)
             est_p = Estado.objects.get(nombre="activo")
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p)
             messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('listaPosts')
+            return redirect('index')
 
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']

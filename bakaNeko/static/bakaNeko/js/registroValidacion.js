@@ -1,8 +1,8 @@
-var nombreUsuario = document.getElementById("registerUsername");
-var clave = document.getElementById("registerPassword");
-var claveRepetir = document.getElementById("registerRepeatPassword");
-var correo = document.getElementById("registerEmail");
-var checkBox = document.getElementById("registerCheck");
+var nombreUsuario = document.getElementById("nomUsuario");
+var clave = document.getElementById("contraUsuario");
+var claveRepetir = document.getElementById("repetirContra");
+var correo = document.getElementById("correoUsuario");
+var checkBox = document.getElementById("aceptarCheck");
 // Get the output text
 
 const form = document.getElementById("forma-registro");

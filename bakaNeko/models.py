@@ -9,6 +9,9 @@ from django.db import models
 class Rol(models.Model):
     idRol = models.AutoField(primary_key=True,verbose_name="Codigo rol")
     nombreRol = models.CharField(max_length=30,verbose_name="Nombre rol")
+class Tipo(models.Model):
+    idTipo = models.AutoField(primary_key=True,verbose_name="Codigo del Tipo")
+    nombreTipo = models.CharField(max_length=30,verbose_name="Nombre del Tipo")
 class Usuario(models.Model):
     idUsuario = models.AutoField(primary_key=True, verbose_name="Codigo de Usuario")
     nombreUsuario = models.CharField(max_length=30, verbose_name="Nombre de Usuario")
