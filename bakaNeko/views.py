@@ -3,22 +3,24 @@ from .models import Usuario, Rol, Post, Comentario, Estado, Tipo
 from django.contrib import messages
 import datetime
 def index(request):
-
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
     posts_i = Post.objects.all()
-    contexto = {"postCarr":posts_car, "post":posts_i}
+    contexto = {"postCarr":posts_car, 
+                "post":posts_i,
+                "user":""
+    }
     return render(request,'bakaNeko/index.html', contexto)
 
 def index_l(request, user):
-    posts_car = Post.objects.filter(fechaPost = datetime.date.today())
-    posts_i = Post.objects.all()
-    usuario = Usuario.objects.get(idUsuario = user)
+    postsl_car = Post.objects.filter(fechaPost = datetime.date.today())
+    postsl_i = Post.objects.all()
+    usuario_l = Usuario.objects.get(idUsuario = user)
     contexto = {
-        "user":usuario,
-        "postCarr":posts_car,
-        "post":posts_i
+        "postCarr":postsl_car,
+        "post":postsl_i,
+        "user":usuario_l
     }
-    return render(request, 'bakaNeko/index.html', contexto)
+    return render(request, 'bakaNeko/indexUser.html', contexto)
 
 def lista(request):
     posts = Post.objects.all()
@@ -58,7 +60,7 @@ def login(request):
     contexto = {"user": usuario_l}
     if usuario_l.contrasenia == contra_l:
         messages.success(request, "Bienvenido "+usuario_l.nombreUsuario+" ☆*:.｡.o(≧▽≦)o.｡.:*☆!!!")
-        return render(request, 'bakaNeko/index.html', contexto)
+        return render(request, 'bakaNeko/indexUser.html', contexto)
     else:
         messages.error(request, "La contraseña no es válida (＃`Д´)!!")
         return redirect('registro')
@@ -67,14 +69,16 @@ def login(request):
       #  return redirect('registro')
 
 
-def verPost(request, id):
+def verPost(request, id, user):
     postSel = Post.objects.get(idPost = id)
     userSel = Usuario.objects.get(idUsuario = postSel.usuario.idUsuario)
     comSel = Comentario.objects.filter(post = postSel)
+    userAct = Usuario.objects.get(idUsuario = user)
     contexto = {
         "post" : postSel,
         "usuario" : userSel,
-        "comentario" : comSel
+        "comentario" : comSel,
+        "user":userAct
     }
 
     return render(request, 'bakaNeko/verPost.html', contexto)
