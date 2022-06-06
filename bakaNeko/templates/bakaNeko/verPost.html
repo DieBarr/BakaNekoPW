@@ -22,12 +22,11 @@
 
 <body>
   <!-------NavBar-->
-  <div id="nav-placeholder"></div>
-  <script>
-    $(function () {
-      $("#nav-placeholder").load("barraNav.html");
-    });
-  </script>
+  {% include 'bakaNeko/includes/barraNav.html' %}
+
+  {% block barraNav %}
+  
+  {% endblock barraNav %} 
 
   <!-- ****** Imágen relacionada a la sección*******-->
   <div id="colorfondo">
@@ -36,7 +35,7 @@
 
       <div class="container">
         <!-- Nav Pills -->
-
+        
         <div class="col-12 col-xl-9">
           <!-- *****POSTEOS******-->
           <div class="tab-content pt-4 p-5" id="nav-tabContent">

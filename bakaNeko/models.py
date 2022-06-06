@@ -24,7 +24,7 @@ class Post(models.Model):
     fechaPost = models.DateField(verbose_name="Fecha del Post")
     tituloPost = models.CharField(max_length=150, verbose_name="Titulo del Post")
     descPost = models.CharField(max_length=500, verbose_name="Descripcion del Post")
-    imagenPost = models.ImageField(upload_to="imagenPosts", null=True)
+    imagenPost = models.ImageField(upload_to="imagenPosts", blank=True, null=True)
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
     razonPost = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)

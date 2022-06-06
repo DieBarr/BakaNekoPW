@@ -23,10 +23,22 @@
 </head>
 
 <body>
+    {% include 'bakaNeko/includes/barraNav.html' %}
+
+    {% block barraNav %}
+    
+    {% endblock barraNav %} 
+    <!-- Mostrando contenido de la tabla Posts -->
+    {% if messages %}
+        {% for i in messages %}
+        <p><br><div class='alert alert-success' role='alert'>{{ i }}</div></p>
+        {% endfor %}
+    {% endif %}
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
         <div class="col-md-8" style="padding:10%;">
             
+
             {% for p in post %}
             <div class="card mb-2" id="card-ajustes" style="padding: 5%;">
                 <div class="card-header">

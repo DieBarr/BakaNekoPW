@@ -38,6 +38,32 @@ def verPost(request, id):
 
     return render(request, 'bakaNeko/verPost.html', contexto)
 
+def nuevoPost(request):
+    return render(request, 'bakaNeko/nuevoPost.html')
+
+def registrarPost(request, user):
+    img_p = ""
+    fecha_p = datetime.date.today()
+    titulo_p = request.POST['asunto']
+    desc_p = request.POST['descPost']
+    if len(titulo_p) > 100:
+        messages.error(request, "Error: El Asunto no puede tener más de 100 caracteres (╬ Ò﹏Ó)!")
+        return redirect('nuevoPost')
+    else:
+        try:
+            img_p = request.FILES['imgPost']
+            usuario_p = Usuario.objects.get(nombreUsuario = user)
+            est_p = Estado.objects.get(nombre="activo")
+            Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p)
+            messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
+            return redirect('listaPosts')
+        except:
+            usuario_p = Usuario.objects.get(nombreUsuario = user)
+            est_p = Estado.objects.get(nombre="activo")
+            Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p)
+            messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
+            return redirect('listaPosts')
+
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']
     fecha_c = datetime.date.today()
