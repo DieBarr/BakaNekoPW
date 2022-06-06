@@ -34,12 +34,12 @@ class Post(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
     razonPost = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-
+    tipo = models.ForeignKey(Tipo, on_delete=models.SET_NULL, null=True)
 class Comentario(models.Model):
     idCom = models.AutoField(primary_key=True, verbose_name="Codigo del Comentario")
     fechaCom = models.DateField(verbose_name="Fecha del comentario")
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
-    post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     estado = models.ForeignKey(Estado, on_delete=models.SET_DEFAULT, default="Activo")
     razonCom = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
     descCom = models.CharField(max_length=400, verbose_name="Contenido del comentario")

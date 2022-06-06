@@ -32,12 +32,14 @@
   
   {% endblock barraNav %} 
   {% block post %}
-    <!-- ******Carousel******  -->
+
     {% if messages %}
         {% for i in messages %}
         <p><div class='alert alert-success' role='alert'>{{ i }}</div></p>
         {% endfor %}
     {% endif %}
+    <!-- ******Carousel******  -->
+    
     <div class="container-fluid-center">
       <div class="row">
         <div class="col-md-2"></div>
@@ -55,48 +57,29 @@
                 <span class="visually-hidden">Next</span>
               </button>
               {% for p in postCarr %}
-                {% if p.imagenPost %}
-                  {% if p == postCarr.0 %}
-                  <div class="carousel-item active" data-bs-interval="5000">
-                    <img src="{{ p.imagenPost.url }}" class="d-block w-100 carrImg" alt="no imagen">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>{{ p.tituloPost }}</h5>
-                      <p>{{ p.descPost }}</p>
-                    </div>
+              {% if p.imagenPost %}
+                {% if p == postCarr.0 %}
+                <div class="carousel-item active" data-bs-interval="5000">
+                  <img src="{{ p.imagenPost.url }}" class="d-block w-100 carrImg" alt="no imagen">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ p.tituloPost }}</h5>
+                    <p>{{ p.descPost }}</p>
                   </div>
-                  {% elif p != postCarr.0 %}
-                  <div class="carousel-item" data-bs-interval="5000">
-                    <img src="{{ p.imagenPost.url }}" class="d-block w-100 carrImg" alt="no imagen">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>{{ p.tituloPost }}</h5>
-                      <p>{{ p.descPost }}</p>
-                    </div>
+                </div>
+                {% elif p != postCarr.0 %}
+                <div class="carousel-item" data-bs-interval="5000">
+                  <img src="{{ p.imagenPost.url }}" class="d-block w-100 carrImg" alt="no imagen">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ p.tituloPost }}</h5>
+                    <p>{{ p.descPost }}</p>
                   </div>
-                  {% endif %}
+                </div>
                 {% endif %}
-              {% endfor %}
+              {% endif %}
+            {% endfor %}
 
-            <div class="carousel-item active" data-bs-interval="5000">
-              <img src="{% static 'bakaNeko/resources/images/foto1.jpg' %}" class="d-block w-100" alt="willSmith">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Will Smith Bitchslap :0</h5>
-                <p>Se puso enojón el will XD</p>
-              </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="5000">
-              <img src="{% static 'bakaNeko/resources/images/foto2.jpg' %}" class="d-block w-100" alt="sadCat">
-              <div class="carousel-caption d-none d-md-block ">
-                <h5>Gato troste</h5>
-                <p>Gato troste, por qué estará troste?</p>
-              </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="5000">
-              <img src="{% static 'bakaNeko/resources/images/foto3.jpg' %}" class="d-block w-100" alt="r_place">
-              <div class="carousel-caption d-none d-md-block ">
-                <h5>r/place</h5>
-                <p>Simplemente un momento épico señores</p>
-              </div>
-            </div>
+ 
+
 
           </div>
 
@@ -163,7 +146,7 @@
                               <img src="{{ p.usuario.fotoUsuario.url }}" id="minifoto-card" alt="foto del usuario">
                           </li>
                           <li class="nav-item">
-                              <h1 id="titulo-card">Anime</h1>
+                              <h1 id="seccion">Anime</h1>
                           </li>
                           <li class="nav-item">
                               <h1 class="mt-1 ms-2" style="font-size: small; color: gray;">~</h1>

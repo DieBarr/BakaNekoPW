@@ -79,7 +79,7 @@ DATABASES={
     'default':
     {
     'ENGINE':'django.db.backends.oracle',
-    'NAME':'bakaneko0w0_high',
+    'NAME':'db20220606160725_high',
     'USER':'admin', 
     'PASSWORD':'8985E2vX78tMUqvq',#Please provide the db password here
     }
