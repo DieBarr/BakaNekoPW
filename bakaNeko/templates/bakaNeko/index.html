@@ -111,14 +111,9 @@
         <div class="col-md-11 col-sm-12">
           <ul class="nav nav-pills pb-1">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="pill" href="#hot">Hot</a>
+              <a class="nav-link active" data-bs-toggle="pill" href="#nuevo">Nuevo</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="pill" href="#nuevo">Nuevo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="pill" href="#top">Top</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'nuevoPost' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="#26a269" class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -142,24 +137,31 @@
               <div class="card mb-4" id="card-ajustes">
                   <div class="card-header">
                       <ul class="nav">
+                          
                           <li class="nav-item">
-                              <img src="{{ p.usuario.fotoUsuario.url }}" id="minifoto-card" alt="foto del usuario">
+                              <h1 id="seccion">{{ p.tipo.nombreTipo }}</h1>
                           </li>
                           <li class="nav-item">
-                              <h1 id="seccion">Anime</h1>
-                          </li>
-                          <li class="nav-item">
-                              <h1 class="mt-1 ms-2" style="font-size: small; color: gray;">~</h1>
+                              <h1 class="mt-1 ms-2" id="subtexto-card">~</h1>
                           </li>
 
                           <li class="nav-item">
-                              <h1 id="titulo-card-2">posteado por:</h1>
+                              <h1 id="subtexto-card">posteado por: </h1>
+                        
+                          </li>
+                          <li>
+                          <div id="espaciador"></div>
+
+                        </li>
+                          <li class="nav-item">
+                            
+                            <img src="{{ p.usuario.fotoUsuario.url }}" id="minifoto-usuario" alt="foto del usuario">
+                        </li>
+                          <li class="nav-item">
+                              <h1 id="subtexto-card"><a href="#" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.nombreUsuario }}</a></h1>
                           </li>
                           <li class="nav-item">
-                              <h1 id="titulo-nombreuser"><a href="#" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.nombreUsuario }}</a></h1>
-                          </li>
-                          <li class="nav-item">
-                              <h1 id="titulo-card-3">en la fecha {{ p.fechaPost }}</h1>
+                              <h1 id="subtexto-card"> en la fecha {{ p.fechaPost }}</h1>
                           </li>
                       </ul>
                   </div>
@@ -180,28 +182,10 @@
                         </li>
 
 
-                        <div class="espaciador"></div>
+                      
 
 
 
-                        <li class="nav-item">
-
-                          <h1 id="subtexto-card">posteado por:</h1>
-                        </li>
-                        <li class="nav-item">
-                          <img src="{{ p.usuario.fotoUsuario.url }}" id="minifoto-card" alt="usuario">
-                        </li>
-                        <li class="nav-item">
-                          <h1 id="subtexto-card"><a href="#">{{ p.usuario.nombreUsuario }}</a></h1>
-                        </li>
-
-
-
-
-
-                        <li class="nav-item">
-                          <h1 id="subtexto-card">{{ p.fechaPost }}</h1>
-                        </li>
 
                       </ul>
 
