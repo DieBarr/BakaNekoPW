@@ -49,6 +49,11 @@
         <label for="desc_post" class="label-post">Descripcion</label>
         <textarea type="text" class="form-control" rows="5" name="descPost" id="desc_post"></textarea>
 
+        <select name="tipoSel" id="tipoSel">
+          {% for t in tipo %}
+            <option value="{{ t.idTipo }}">{{ t.nombreTipo }}</option>
+          {% endfor %}
+        </select>
         <!--Mensaje de confirmacion o rechazo-->
         {% if messages %}
             {% for i in messages %}
