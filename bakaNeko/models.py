@@ -1,6 +1,7 @@
 from pyexpat import model
 from tabnanny import verbose
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Rol(models.Model):
@@ -19,7 +20,7 @@ class Estado(models.Model):
     nombre = models.CharField(max_length=30, verbose_name="Tipo de status")
 class Post(models.Model):
     idPost = models.AutoField(primary_key=True, verbose_name="Codigo del Post")
-    fechaPost = models.DateField(verbose_name="Fecha del Post")
+    fechaPost = models.DateTimeField(verbose_name="Fecha del Post", default=timezone.now)
     tituloPost = models.CharField(max_length=150, verbose_name="Titulo del Post")
     descPost = models.CharField(max_length=500, verbose_name="Descripcion del Post")
     imagenPost = models.ImageField(upload_to="imagenPosts", null=True)
