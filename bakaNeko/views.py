@@ -78,3 +78,22 @@ def registrarComentario(request, id, user):
     messages.success(request, "Comentario creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
 
     return redirect('verPosts', id)
+
+def secanime(request):
+    posts = Post.objects.all()
+
+    datos = {
+    'posts' : posts
+    }
+    return render(request,'bakaNeko/secAnime.html', datos)
+
+def secjuegos(request):
+    
+    posts = Post.objects.all()
+
+    datos2 = {
+    'posts' : posts
+    }
+
+
+    return render(request,'bakaNeko/secVideojuegos.html', datos2)
