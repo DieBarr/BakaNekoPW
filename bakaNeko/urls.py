@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import index, lista, registro, login_view, signup_view, verPost, verPerfil, registrarComentario, nuevoPost, registrarPost, secanime, secjuegos, login
-
+from .views import index, lista, registro, verPost, verPerfil, registrarComentario, nuevoPost, registrarPost, secanime, secjuegos, login
+from . import views
 
 urlpatterns = [
     path('', index, name='index'),
     path('registro/',registro,name='registro'),
-    path('reg', signup_view, name='regUser'),
-    path('log', login_view, name='logUser'),
+    path('reg', views.signup_view, name='regUser'),
+    path('log', views.login_view, name='logUser'),
     path('posts', lista, name="listaPosts"),
     path('posts/<int:id>', verPost, name='verPosts'),
     path('perfil/<int:id>', verPerfil, name='verPerf'),
