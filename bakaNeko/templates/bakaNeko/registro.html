@@ -35,11 +35,11 @@
   
 <div id="fondo">
   <!-- Pills navs -->
-  {% if messages %}
+    {% if messages %}
     {% for i in messages %}
       <p><div class='alert alert-danger' role='alert'>{{ i }}</div></p>
     {% endfor %}
-  {% endif %}
+     {% endif %}
   <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
     <li class="nav-item" role="presentation">
       <a class="nav-link active" id="tab-login" data-bs-toggle="pill"  href="#pills-login" role="tab"
@@ -55,17 +55,17 @@
   <!-- Pills content -->
   <div class="tab-content">
     <div class="tab-pane fade in show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-      <form id="forma-login" action="{% url 'login' %}" method="POST" enctype="multipart/form-data">
+      <form id="login" action="{% url 'login' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="text" name="nomLogin" id="nomLogin" class="form-control" required/>
-          <label class="form-label" for="nomLogin">Nombre de Usuario</label>
+          {{ loginForm.email }}
+          <label class="form-label" for="nomLogin">Correo</label>
         </div>
 
         <!-- Password input -->
         <div class="form-outline mb-4">
-          <input type="password" name="contraLogin" id="contraLogin" class="form-control" required/>
+          {{ loginForm.contrasenia }}
           <label class="form-label" for="contraLogin">Contraseña</label>
         </div>
 
@@ -88,6 +88,12 @@
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block btn-green mb-4">Iniciar sesión</button>
 
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role='alert'>
+          {{ message }}
+        </div>
+        {% endfor %}
+
         <!-- Register buttons -->
         <div class="text-center">
           <p>No eres usuario? <a href="#pills-register">Registrarse</a></p>
@@ -95,34 +101,34 @@
       </form>
     </div>
     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-      <form id="forma-registro" method="POST" action="{% url 'registrar' %}" enctype="multipart/form-data">
+      <form id="register" action ="{% url 'registrar' %}"enctype="multipart/form-data">
         {% csrf_token %}
         <div class="text-center mb-3 form">
             <!-- Username input -->
           <div class="form-outline mb-4">
-            <input type="text" name="nomUsuario" id="nomUsuario" class="form-control" />
+            {{ signupForm.user_name }}
             <label class="form-label" for="nomUsuario">Nombre de usuario</label>
           </div>
 
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="email" name="correoUsuario" id="correoUsuario" class="form-control" required/>
+            {{ signupForm.email }}
             <label class="form-label" for="correoUsuario">Email</label>
           </div>
           <!-- Image input -->
           <div class="form-outline mb-4">
-            <input type="file" name="fotoPerfil" id="fotoPerfil" class="form-control" required />
+            {{ signupForm.foto }}
             <label class="form-label" for="fotoPerfil">Foto de perfil</label>
           </div>
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" name="contraUsuario" id="contraUsuario" class="form-control" required/>
+            {{ signupForm.password }}
             <label class="form-label" for="contraUsuario">Contraseña</label>
           </div>
 
           <!-- Repeat Password input -->
           <div class="form-outline mb-4">
-            <input type="password" name="repetirContra" id="repetirContra" class="form-control" required/>
+            {{ signupForm.password2 }}
             <label class="form-label" for="repetirContra">Repetir contraseña</label>
           </div>
 

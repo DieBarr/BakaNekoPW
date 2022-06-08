@@ -1,7 +1,87 @@
-from django.shortcuts import render, redirect
+from ast import For
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Usuario, Rol, Post, Comentario, Estado
 from django.contrib import messages
 import datetime
+from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.contrib.auth.hashers import make_password
+from .forms import FormLoginUsuario, FormRegisUsuario
+from django.http.response import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
+
+def login_view(request):
+    login_form = FormLoginUsuario(request.POST or None)
+    if login_form.is_valid():
+        email = login_form.cleaned_data.get('email')
+        password = login_form.cleaned_data.get('contrasenia')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Has iniciado sesion correctamente')
+            return redirect('index')
+        else:
+            messages.warning(
+                request, 'Usuario o Contrasena invalida')
+            return redirect('registro')
+
+    messages.error(request, 'Formulario Invalido')
+    return redirect('index')
+
+
+
+
+
+
+
+def signup_view(request):
+    signup_form = FormRegisUsuario(request.POST or None)
+    if signup_form.is_valid():
+        email = signup_form.cleaned_data.get('email')
+        user_name = signup_form.cleaned_data.get('nombreUsuario')
+        foto = signup_form.cleaned_data.get('fotoUsuario')
+        password = signup_form.cleaned_data.get('contrasenia')
+        try:
+            user = get_user_model().objects.create(
+                email=email,
+                user_name=user_name,
+                foto=foto,
+                password=make_password(password),
+                is_active=True
+            )
+            login(request, user)
+            return redirect('index')
+
+        except Exception as e:
+            print(e)
+            return JsonResponse({'detail': f'{e}'})
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+
+@login_required(login_url='index')
+def profile_view(request):
+    return render(request, 'bakaNeko/perfil.html')
+
+
+"""def user_detail(request, slug):
+    user = get_object_or_404(get_user_model(), slug=slug)
+    is_follower = False
+    try:
+        if user.is_follower(request.user):
+            is_follower = True
+    except:
+        messages.warning(
+            request, 'Debes Iniciar sesion para mas funcionalidades')
+
+    return render(request, 'user/user_detail.html', {'user_detail': user, "is_follower": is_follower})
+"""
+
+
+
+
+
+
 def index(request):
 
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
@@ -19,40 +99,6 @@ def lista(request):
 def registro(request):
     return render(request,'bakaNeko/registro.html')
   
-def registrar(request):
-    u_nombre = request.POST['nomUsuario']
-    u_email = request.POST['correoUsuario']
-    u_foto = request.FILES['fotoPerfil']
-    u_contrasenia = request.POST['contraUsuario']
-    u_repcontra = request.POST['repetirContra']
-    rol_u = Rol.objects.get(nombreRol = 'usuario')
-    ##regexEmail = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/"
-    ##regexPassword = "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/"
-
-    if (len(u_nombre) < 4 and len(u_nombre) > 12):
-        messages.error(request, "El nombre de usuario no es válido (＃`Д´) !")
-        return redirect('registro')
-    elif u_contrasenia != u_repcontra:
-        messages.error(request, "Las contraseñas no coinciden ٩(╬ʘ益ʘ╬)۶ !")
-        return redirect('registro')
-    ##insert
-    Usuario.objects.create(nombreUsuario = u_nombre, email = u_email, fotoUsuario = u_foto, contrasenia = u_contrasenia, rol = rol_u)
-    return redirect('registro')
-
-def login(request):
-    nombre_l = request.POST['nomLogin']
-    contra_l = request.POST['contraLogin']
-    try:
-        usuario_l = Usuario.objects.get(nombreUsuario = nombre_l)
-        if usuario_l.contrasenia == contra_l:
-            messages.success(request, "Bienvenido "+usuario_l.nombreUsuario+" ☆*:.｡.o(≧▽≦)o.｡.:*☆!!!")
-            return redirect('index')
-        else:
-            messages.error(request, "La contraseña no es válida (＃`Д´)!!")
-            return redirect('registro')
-    except:
-        messages.error(request, "El usuario no existe, se sugiere crear uno (╬ Ò﹏Ó)")
-        return redirect('registro')
 
 
 def verPost(request, id):
@@ -133,13 +179,17 @@ def secanimeAdm(request):
     }
     return render(request,'bakaNeko/Admin/secAnimeAdm.html', datos)
 
-def secjuegosAdm(request):
-    
-    posts = Post.objects.all()
+def eliminarPost(request, id):
 
-    datos2 = {
-    'posts' : posts
-    }
+    post1 = Post.objects.get(idPost=id)
+    post1.delete()
+    messages.success(request, 'Post eliminado correctamente')
 
+    return redirect('index')
 
-    return render(request,'bakaNeko/Admin/secVideojuegosAdm.html', datos2)
+def usuarioAdm(request, id):
+
+    user = Usuario.objects.get(idUsuario=id)
+    user.delete()
+    messages.success(request, 'Usuario Baneado')
+    return redirect('index')

@@ -15,15 +15,16 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, registrar, secanime, secjuegos, login, \
-    secanimeAdm, secjuegosAdm
+from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, secanime, secjuegos, \
+    secanimeAdm, eliminarPost, login_view, signup_view
+
 
 
 urlpatterns = [
     path('', index, name='index'),
     path('registro/',registro,name='registro'),
-    path('registroUsuario', registrar, name='registrar'),
-    path('iniciar/', login, name='login'),
+    path('login', login_view, name='login'),
+    path('registrar', signup_view, name='registrar'),
     path('posts', lista, name="listaPosts"),
     path('posts/<int:id>', verPost, name='verPosts'),
     path('registrarCom/com_<int:id>_<str:user>', registrarComentario, name='registrarCom'),
@@ -32,5 +33,5 @@ urlpatterns = [
     path('secAnime/', secanime, name='secAnime'),
     path('secVideojuegos/', secjuegos, name='secJuegos'),
     path('Admin/secAnimeAdm/', secanimeAdm, name='secAnimeAdm'),
-    path('Admin/secVideojuegosAdm/', secjuegosAdm, name='secJuegosAdm'),
+    path('Admin/eliminarPost/', eliminarPost, name='secEliminarPost'),
 ]
