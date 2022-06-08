@@ -282,15 +282,20 @@ h.navbar-brand {
 
 #titulo-card{
   color:#26a269 !important;
-  font-size: 175%;
+  font-size: 125%;
   font-weight: bold;
   margin-left: 10px;
   margin-top: 5px;
 }
 
+.post-card{
+  font-size: 90%;
+  margin-top: 5px;
+  margin-left: 2px;
+}
 
 #titulo-nombreuser{
-  font-size: small;
+  font-size: 90%;
   margin-top: 5px;
   margin-left: 2px;
 
@@ -307,6 +312,7 @@ h.navbar-brand {
   font-family: sans-serif;
   font-weight: bold;
 }
+
 .tab {
   display: inline-block;
   margin-left: 10%;
@@ -357,6 +363,7 @@ h.navbar-brand {
   background-color: #26a269;
 
 }
+
 /* Inicio ajustes Cards */
 #minifoto-usuario{
   max-width: 1.5rem;

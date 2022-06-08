@@ -15,17 +15,15 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import index, index_l, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, registrar, secanime, secjuegos, login
+from .views import index, lista, registro, verPost, verPerfil, registrarComentario, nuevoPost, registrarPost, secanime, secjuegos, login
 
 
 urlpatterns = [
     path('', index, name='index'),
     path('registro/',registro,name='registro'),
-    path('registroUsuario', registrar, name='registrar'),
-    path('log/', login, name='login'),
-    path('inicio', index_l, name="indUser"),
     path('posts', lista, name="listaPosts"),
-    path('posts/<int:id><int:user>', verPost, name='verPosts'),
+    path('posts/<int:id>', verPost, name='verPosts'),
+    path('perfil/<int:id>', verPerfil, name='verPerf'),
     path('registrarCom/com_<int:id>_<str:user>', registrarComentario, name='registrarCom'),
     path('nuevoPost/<int:user>', nuevoPost, name="nuevoPost"),
     path('publicar/<int:user>', registrarPost, name="registrarPost"),
