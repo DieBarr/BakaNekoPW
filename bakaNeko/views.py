@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from ast import For
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Usuario, Rol, Post, Comentario, Estado, Tipo
 from django.contrib import messages
 import datetime
+
 def index(request):
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
     posts_i = Post.objects.all()

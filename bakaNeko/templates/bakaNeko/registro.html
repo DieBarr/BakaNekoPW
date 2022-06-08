@@ -30,20 +30,19 @@
   <!-- Pills content -->
   <div class="tab-content">
     <div class="tab-pane fade in show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-      <form id="forma-login" action="" method="POST" enctype="multipart/form-data">
+      <form id="login" action="{% url 'logUser' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="text" name="nomLogin" id="nomLogin" class="form-control" required/>
-          <label class="form-label" for="nomLogin">Nombre de Usuario</label>
+          {{ loginForm.email }}
+          <label class="form-label" for="nomLogin">Correo</label>
         </div>
 
         <!-- Password input -->
         <div class="form-outline mb-4">
-          <input type="password" name="contraLogin" id="contraLogin" class="form-control" required/>
+          {{ loginForm.contrasenia }}
           <label class="form-label" for="contraLogin">Contraseña</label>
         </div>
-
         <!-- 2 column grid layout -->
         <div class="row mb-4">
           <div class="col-md-6 d-flex justify-content-center">
@@ -69,35 +68,36 @@
         </div>
       </form>
     </div>
+    <!-- Seccion para Registrarse -->
     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-      <form id="forma-registro" method="POST" action="" enctype="multipart/form-data">
+      <form id="forma-registro" method="POST" action="{% url 'regUser' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="text-center mb-3 form">
             <!-- Username input -->
           <div class="form-outline mb-4">
-            <input type="text" name="nomUsuario" id="nomUsuario" class="form-control" />
-            <label class="form-label" for="nomUsuario">Nombre de usuario</label>
+            {{ signupForm.user_name }}
+            <label class="form-label" for="signupUser">Nombre de usuario</label>
           </div>
 
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="email" name="correoUsuario" id="correoUsuario" class="form-control" required/>
-            <label class="form-label" for="correoUsuario">Email</label>
+            {{ signupForm.email }}
+            <label class="form-label" for="signupEmail">Email</label>
           </div>
           <!-- Image input -->
           <div class="form-outline mb-4">
-            <input type="file" name="fotoPerfil" id="fotoPerfil" class="form-control" required />
-            <label class="form-label" for="fotoPerfil">Foto de perfil</label>
+            {{ signupForm.foto }}
+            <label class="form-label" for="signupFoto">Foto de perfil</label>
           </div>
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" name="contraUsuario" id="contraUsuario" class="form-control" required/>
-            <label class="form-label" for="contraUsuario">Contraseña</label>
+            {{ signupForm.password }}
+            <label class="form-label" for="signupPassword">Contraseña</label>
           </div>
 
           <!-- Repeat Password input -->
           <div class="form-outline mb-4">
-            <input type="password" name="repetirContra" id="repetirContra" class="form-control" required/>
+            {{ signupForm.password2 }}
             <label class="form-label" for="repetirContra">Repetir contraseña</label>
           </div>
 
