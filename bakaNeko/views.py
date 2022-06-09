@@ -8,8 +8,7 @@ def index(request):
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
     posts_i = Post.objects.all()
     contexto = {"postCarr":posts_car, 
-                "post":posts_i,
-                "user":""
+                "post":posts_i
     }
     return render(request,'bakaNeko/index.html', contexto)
 
@@ -50,12 +49,10 @@ def verPost(request, id):
 
     return render(request, 'bakaNeko/verPost.html', contexto)
 
-def nuevoPost(request, user):
-    usuario_p = Usuario.objects.get(idUsuario = user)
+def nuevoPost(request):
     tipos = Tipo.objects.all()
     contexto = {
         "tipo":tipos,
-        "user":usuario_p
     }
     return render(request, 'bakaNeko/nuevoPost.html', contexto)
 
@@ -66,12 +63,12 @@ def registrarPost(request, user):
     desc_p = request.POST['descPost']
     tipo_p = request.POST['tipoSel']
     tipo_p2 = Tipo.objects.get(idTipo = tipo_p)
-    usuario_p = Usuario.objects.get(idUsuario = user)
+    usuario_p = Usuario.objects.get(nombreUsuario = user)
     est_p = Estado.objects.get(nombre="activo")
-    request.session['user'] = usuario_p
+    ##request.session['user'] = usuario_p
     if len(titulo_p) > 100:
         messages.error(request, "Error: El Asunto no puede tener más de 100 caracteres (╬ Ò﹏Ó)!")
-        return redirect('nuevoPost', usuario_p)
+        return redirect('nuevoPost')
     else:
         try:
             img_p = request.FILES['imgPost']

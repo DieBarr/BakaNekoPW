@@ -28,8 +28,8 @@ urlpatterns = [
     path('posts/<int:id>', verPost, name='verPosts'),
     path('perfil/<int:id>', verPerfil, name='verPerf'),
     path('registrarCom/com_<int:id>_<str:user>', registrarComentario, name='registrarCom'),
-    path('nuevoPost/<int:user>', nuevoPost, name="nuevoPost"),
-    path('publicar/<int:user>', registrarPost, name="registrarPost"),
+    path('nuevoPost/', nuevoPost, name="nuevoPost"),
+    path('publicar/<str:user>', registrarPost, name="registrarPost"),
     path('secAnime/', secanime, name='secAnime'),
     path('secVideojuegos/', secjuegos, name='secJuegos'),
 ]

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-
+from bakaNeko.models import *
 from .forms import FormLoginUsuario, FormRegisUsuario
 
 def login_view(request):
@@ -31,15 +31,19 @@ def signup_view(request):
     if signup_form.is_valid():
         email = signup_form.cleaned_data.get('email')
         user_name = signup_form.cleaned_data.get('user_name')
-        profile_pic = signup_form.cleaned_data.get('profile_pic')
         password = signup_form.cleaned_data.get('password')
         try:
             user = get_user_model().objects.create(
                 email=email,
                 user_name=user_name,
-                profile_pic=profile_pic,
                 password=make_password(password),
                 is_active=True
+            )
+            Usuario.objects.create(
+                nombreUsuario = user_name, 
+                email = email, 
+                contrasenia=password,
+                rol = Rol.objects.get(idRol = 1)
             )
             login(request, user)
             return redirect('bakaNeko:index')
@@ -48,6 +52,7 @@ def signup_view(request):
             messages.warning(request, e)
             return JsonResponse({'detail': f'{e}'})
     else:
+        messages.warning(request, "Ocurrió un error desconocido")
         return redirect('bakaNeko:registro')
         
 def logout_view(request):

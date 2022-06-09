@@ -44,16 +44,6 @@ class FormRegisUsuario(forms.Form):
         )
     )
 
-    profile_pic = forms.ImageField(
-        widget=forms.FileInput(
-            attrs={
-                'id': 'profile_pic',
-                'type': 'file',
-                'class': 'form-control'
-            }
-        )
-    )
-
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={

@@ -1,4 +1,5 @@
-{% extends 'bakaNeko/includes/barraNav.html' %}
+{% extends "bakaNeko/includes/barraNav.html" %}
+
   {% load static %}
 
   {% block titulo %}
@@ -91,7 +92,18 @@
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'registro' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+              {% if user.is_authenticated %}
+              <a class="nav-link" href="{% url 'bakaNeko:nuevoPost' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="#26a269" class="bi bi-plus-square" viewBox="0 0 16 16">
+                <path
+                  d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
+                </path>
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                </path>
+              </svg> Nuevo Post</a>
+              {% else %}
+              <a class="nav-link" href="{% url 'bakaNeko:registro' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="#26a269" class="bi bi-plus-square" viewBox="0 0 16 16">
                   <path
                     d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
@@ -100,6 +112,7 @@
                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
                   </path>
                 </svg> Nuevo Post</a>
+                {% endif %}
             </li>
 
           </ul>
@@ -165,7 +178,7 @@
 
                   </div>
                   {% endfor %}
-                  {% endblock post %}
+                  {% endblock %}
 
                 </div>
 
@@ -186,12 +199,12 @@
                         </h1>
                         <ul class="nav nav-pills pb-1 nav-fill sss">
                           <li class="nav-item">
-                            <a class="nav-link active _pill1" href="{% url 'registro' %}">Registrarse</a>
+                            <a class="nav-link active _pill1" href="{% url 'bakaNeko:registro' %}">Registrarse</a>
                           </li>
                         </ul>
                         <ul class="nav nav-pills pb-1 nav-fill">
                           <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'registro' %}">Nuevo Post</a>
+                            <a class="nav-link active" href="{% url 'bakaNeko:registro' %}">Nuevo Post</a>
                           </li>
                         </ul>
           
@@ -260,4 +273,4 @@
       </div>
     </div>
   </div>
-  {% endblock cuerpo %}
+  {% endblock %}
