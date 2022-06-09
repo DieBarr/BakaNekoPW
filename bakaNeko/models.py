@@ -1,6 +1,6 @@
 from pyexpat import model
 from tabnanny import verbose
-
+from django.conf import settings
 from django.db import models
 
 
@@ -35,7 +35,7 @@ class Post(models.Model):
     imagenPost = models.ImageField(upload_to="imagenPosts", blank=True, null=True)
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
     razonPost = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tipo = models.ForeignKey(Tipo, on_delete=models.SET_NULL, null=True)
 class Comentario(models.Model):
     idCom = models.AutoField(primary_key=True, verbose_name="Codigo del Comentario")

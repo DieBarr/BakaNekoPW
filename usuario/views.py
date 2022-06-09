@@ -11,7 +11,7 @@ def login_view(request):
     login_form = FormLoginUsuario(request.POST or None)
     if login_form.is_valid():
         email = login_form.cleaned_data.get('email')
-        password = login_form.cleaned_data.get('password')
+        password = login_form.cleaned_data.get('contrasenia')
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
@@ -20,7 +20,7 @@ def login_view(request):
         else:
             messages.warning(
                 request, 'Usuario o Contrasena invalida')
-            return redirect('bakaNeko:registro')
+            return redirect('bakaNeko:index')
 
     messages.error(request, 'Formulario Invalido')
     return redirect('bakaNeko:index')
@@ -47,16 +47,18 @@ def signup_view(request):
         except Exception as e:
             messages.warning(request, e)
             return JsonResponse({'detail': f'{e}'})
-
+    else:
+        return redirect('bakaNeko:registro')
+        
 def logout_view(request):
     logout(request)
-    return redirect('index')
+    return redirect('bakaNeko:index')
 
-@login_required(login_url='index')
+@login_required(login_url='bakaNeko:index')
 def profile_view(request):
     return render(request, 'bakaNeko/perfil.html')
 
-
+"""
 def user_detail(request, slug):
     user_detail = get_object_or_404(get_user_model(), slug=slug)
     if not request.user.is_authenticated:
@@ -73,3 +75,4 @@ def follow(request, slug):
         to_follow.followers.add(request.user)
     to_follow.save
     return redirect(to_follow)
+"""

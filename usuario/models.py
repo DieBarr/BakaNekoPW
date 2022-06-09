@@ -56,7 +56,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         blank=True)
     slug = models.SlugField(max_length=255, unique=True)
 
-    register_date = models.DateTimeField(datetime.date.today())
+    register_date = models.DateTimeField(default=timezone.now)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
