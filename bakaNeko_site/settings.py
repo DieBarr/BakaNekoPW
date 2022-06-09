@@ -80,8 +80,8 @@ WSGI_APPLICATION = 'bakaNeko_site.wsgi.application'
 DATABASES={
     'default':{
         'ENGINE':'django.db.backends.oracle',
-        'NAME':'127.0.0.1:1521/xe',
-        'USER':'pruebaxd', 
+        'NAME':'127.0.0.1:1521/xepdb1',
+        'USER':'pruebaxd',
         'PASSWORD':'prueba',#Please provide the db password here
         'TEST':{
             'USER': 'default_test',

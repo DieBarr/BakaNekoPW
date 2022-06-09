@@ -2,6 +2,7 @@ from ast import For
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Usuario, Rol, Post, Comentario, Estado, Tipo
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 import datetime
 
 def index(request):
@@ -27,24 +28,20 @@ def login(request):
     pass
 
 def verPerfil(request, id):
-    userPerf = Usuario.objects.get(idUsuario = id)
-    postPerf = Post.objects.filter(usuario_id = id)
+    userPerf = get_user_model().objects.get(id = id)
     contexto ={
         "usuario": userPerf,
-        "post": postPerf
     }
     return render(request, 'bakaNeko/perfil.html', contexto)
     
 def verPost(request, id):
     postSel = Post.objects.get(idPost = id)
-    userSel = Usuario.objects.get(idUsuario = postSel.usuario.idUsuario)
+    userSel = get_user_model().objects.get(id = postSel.usuario.id)
     comSel = Comentario.objects.filter(post = postSel)
-    userAct = Usuario.objects.get(idUsuario = 4)
     contexto = {
         "post" : postSel,
         "usuario" : userSel,
-        "comentario" : comSel,
-        "user":userAct
+        "comentario" : comSel
     }
 
     return render(request, 'bakaNeko/verPost.html', contexto)
@@ -63,27 +60,27 @@ def registrarPost(request, user):
     desc_p = request.POST['descPost']
     tipo_p = request.POST['tipoSel']
     tipo_p2 = Tipo.objects.get(idTipo = tipo_p)
-    usuario_p = Usuario.objects.get(nombreUsuario = user)
+    usuario_p = get_user_model().objects.get(user_name = user)
     est_p = Estado.objects.get(nombre="activo")
     ##request.session['user'] = usuario_p
     if len(titulo_p) > 100:
         messages.error(request, "Error: El Asunto no puede tener más de 100 caracteres (╬ Ò﹏Ó)!")
-        return redirect('nuevoPost')
+        return redirect('bakaNeko:nuevoPost')
     else:
         try:
             img_p = request.FILES['imgPost']
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p, tipo=tipo_p2)
             messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('index')
+            return redirect('bakaNeko:index')
         except:
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p,  tipo=tipo_p2)
             messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('index')
+            return redirect('bakaNeko:index')
 
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']
     fecha_c = datetime.date.today()
-    usuario_c = Usuario.objects.get(idUsuario = user)
+    usuario_c = get_user_model().objects.get(id = user)
     post_c = Post.objects.get(idPost = id)
     est_c = Estado.objects.get(nombre = "activo")
 
@@ -91,10 +88,10 @@ def registrarComentario(request, id, user):
     
     messages.success(request, "Comentario creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
 
-    return redirect('verPosts', id)
+    return redirect('bakaNeko:verPosts', id)
 
 def secanime(request):
-    posts = Post.objects.filter(tipo_id = 1)
+    posts = Post.objects.filter(tipo_id = 3)
 
     datos = {
     'posts' : posts
@@ -103,7 +100,7 @@ def secanime(request):
 
 def secjuegos(request):
     
-    posts = Post.objects.filter(tipo_id = 2)
+    posts = Post.objects.filter(tipo_id = 4)
 
     datos2 = {
     'posts' : posts

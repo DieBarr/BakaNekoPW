@@ -2,6 +2,7 @@ from pyexpat import model
 from tabnanny import verbose
 from django.conf import settings
 from django.db import models
+from usuario import *
 
 
 
@@ -40,7 +41,7 @@ class Post(models.Model):
 class Comentario(models.Model):
     idCom = models.AutoField(primary_key=True, verbose_name="Codigo del Comentario")
     fechaCom = models.DateField(verbose_name="Fecha del comentario")
-    usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     estado = models.ForeignKey(Estado, on_delete=models.SET_DEFAULT, default="Activo")
     razonCom = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")

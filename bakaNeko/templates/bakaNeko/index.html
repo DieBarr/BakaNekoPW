@@ -144,17 +144,17 @@
                         </li>
                           <li class="nav-item">
                             
-                            <img src="{{ p.usuario.fotoUsuario.url }}" id="minifoto-usuario" alt="foto del usuario">
+                            <img src="{{ p.usuario.profile_pic.url }}" id="minifoto-usuario" alt="foto del usuario">
                         </li>
                           <li class="nav-item">
-                              <h1 id="subtexto-card"><a href="{% url 'verPerf' p.usuario.idUsuario %}" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.nombreUsuario }}</a></h1>
+                              <h1 id="subtexto-card"><a href="{% url 'bakaNeko:verPerf' p.usuario.id %}" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.user_name }} </a></h1>
                           </li>
                           <li class="nav-item">
-                              <h1 id="subtexto-card"> en la fecha {{ p.fechaPost }}</h1>
+                              <h1 id="subtexto-card" style="padding-left:5px;"> en la fecha {{ p.fechaPost }}</h1>
                           </li>
                       </ul>
                   </div>
-                  <a href="{% url 'verPosts' p.idPost %}"><h5 id="texto-card" class="ps-1">{{ p.tituloPost }}</h5></a>
+                  <a href="{% url 'bakaNeko:verPosts' p.idPost %}"><h5 id="texto-card" class="ps-1">{{ p.tituloPost }}</h5></a>
                   {% if p.imagenPost %}
                     <a href="{{ p.imagenPost.url }}"><img class="card-img-top" id="imgcard" src="{{ p.imagenPost.url }}" alt="No imagen"></a>
                   {% else %}

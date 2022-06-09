@@ -1,5 +1,6 @@
 {% extends 'bakaNeko/includes/barraNav.html' %}
 
+{% load static %}
   {% block post %}
 
   {% block titulo %}
@@ -74,7 +75,7 @@
                   {% endfor %}
                 </div>
                 {% endif %}
-                <form action="{% url 'registrarCom' post.idPost post.usuario.idUsuario %}" class="mb-3" method="POST" id="formCom">
+                <form action="{% url 'bakaNeko:registrarCom' post.idPost user.id %}" class="mb-3" method="POST" id="formCom">
                   {% csrf_token %}
                   <div class="from-group mb-2">
                     <label for="comment">Responde a este post:</label>
@@ -90,8 +91,8 @@
                 {% for c in comentario %}
                 <div class="row" style="padding-top: 5%;">
                   <div class="col-md-2 col-sm-2" style="background-color: azure;">
-                      <img src="{{ c.usuario.fotoUsuario.url }}" style="width: 70%; margin-left: 20%;">
-                      <a href="" style="font-size: 90%;">{{ c.usuario.nombreUsuario }}</a>
+                      <img src="{{ c.usuario.profile_pic.url }}" style="width: 50%; margin-left: 20%;">
+                      <a href="{% url 'bakaNeko:verPerf' c.usuario.id %}" style="font-size: 90%;">{{ c.usuario.user_name }}</a>
                   </div>
                   <div class="col-md-10 col-sm-10">
                       <p>{{ c.descCom }}</p>
