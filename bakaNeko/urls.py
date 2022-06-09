@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import index, lista, registro, verPost, verPerfil, registrarComentario, nuevoPost, registrarPost, secanime, secjuegos, login
-from usuario import views
+from bakaNeko.views import *
+
+app_name = 'bakaNeko'
 
 urlpatterns = [
     path('', index, name='index'),
     path('registro/',registro,name='registro'),
-    path('reg', views.signup_view, name='regUser'),
-    path('log', views.login_view, name='logUser'),
-    path('posts', lista, name="listaPosts"),
+    path('reg', registrarUsuario, name='regUser'),
+    path('login', iniciarSesion, name='iniciar'),
     path('posts/<int:id>', verPost, name='verPosts'),
     path('perfil/<int:id>', verPerfil, name='verPerf'),
     path('registrarCom/com_<int:id>_<str:user>', registrarComentario, name='registrarCom'),

@@ -22,6 +22,7 @@ class Usuario(models.Model):
     fotoUsuario = models.ImageField(upload_to="fotoPerfiles", null=True)
     rol = models.ForeignKey(Rol, on_delete=models.SET_DEFAULT, default="sinRol")
 
+
 class Estado(models.Model):
     idEstado = models.AutoField(primary_key=True, verbose_name="Codigo de Status")
     nombre = models.CharField(max_length=30, verbose_name="Tipo de status")
