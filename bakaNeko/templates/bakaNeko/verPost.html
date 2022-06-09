@@ -75,7 +75,15 @@
                   {% endfor %}
                 </div>
                 {% endif %}
+                
+                <!-- Si es que esta logeado, tirará a registro -->
+
+                {% if user.is_authenticated %}
                 <form action="{% url 'bakaNeko:registrarCom' post.idPost user.id %}" class="mb-3" method="POST" id="formCom">
+                {% else %}
+                <form action="{% url 'bakaNeko:registro' %}" class="mb-3" method="POST" id="formCom">
+                {% endif %}
+                  
                   {% csrf_token %}
                   <div class="from-group mb-2">
                     <label for="comment">Responde a este post:</label>

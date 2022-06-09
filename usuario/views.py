@@ -60,8 +60,9 @@ def logout_view(request):
     return redirect('bakaNeko:index')
 
 @login_required(login_url='bakaNeko:index')
-def profile_view(request):
-    return render(request, 'bakaNeko/perfil.html')
+def profile_view(request, id):
+    usuario = get_user_model().objects.get(id = id)
+    return render(request, 'bakaNeko/perfil.html', { "usuario": usuario })
 
 """
 def user_detail(request, slug):
