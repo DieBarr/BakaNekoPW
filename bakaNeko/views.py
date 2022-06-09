@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from .models import Usuario, Rol, Post, Comentario, Estado, Tipo
 from django.contrib import messages
 import datetime
+
+
 def index(request):
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
     posts_i = Post.objects.all()
@@ -11,19 +14,56 @@ def index(request):
     }
     return render(request,'bakaNeko/index.html', contexto)
 
-def lista(request):
-    posts = Post.objects.all()
-    coments = Comentario.objects.all()
-    contexto = {"post":posts, "comentario":coments}
-    return render(request, 'bakaNeko/listaPosts.html', contexto)
-
 def registro(request):
     return render(request,'bakaNeko/registro.html')
   
 def registrarUsuario(request):
-    pass
-def login(request):
-    pass
+    nom_r = request.POST['nomUsuario']
+    email_r = request.POST['correoUsuario']
+
+    ## condicional de foto por default
+    try:
+        foto_r = request.FILES['fotoPerfil']
+    except:
+        foto_r = 'fotoPerfiles/default.jpg'
+    ##
+    contra_r = request.POST['contraUsuario']
+    rol_r = Rol.objects.get(nombreRol = 'usuario')
+    ## Condicionales
+    if contra_r != request.POST['repetirContra']:
+        messages.warning(request, "Las contraseñas no coinciden!")
+        return redirect('registro')
+    try:
+        if Usuario.objects.get(nombreUsuario = nom_r):
+            messages.warning(request, "El usuario ya existe!!")
+            return redirect('registro')
+    except:
+        try:
+            if Usuario.objects.get(email = email_r):
+                messages.warning(request, "El usuario ya existe!!")
+                return redirect('registro')
+        except:
+            Usuario.objects.create(nombreUsuario = nom_r, email = email_r, fotoUsuario = foto_r, contrasenia = contra_r, rol = rol_r)
+            messages.success(request, "Se ha registrado correctamente!")
+            return redirect('registro')
+
+def iniciarSesion(request):
+    nom_l = request.POST['nomLogin']
+    contra_l = request.POST['contraLogin']
+    ## autenticacion
+    try:
+        usuario = Usuario.objects.get(nombreUsuario = nom_l)
+        if usuario.contrasenia == contra_l:
+            login(request, usuario)
+            messages.success(request, "Inicio de sesión exitoso!!")
+            return redirect('index')
+        else:
+            messages.warning(request, "Contraseña invalida!!")
+            return redirect('registro')
+    except:
+        messages.warning(request, "Usuario o contraseña invalidos")
+        return redirect('registro')
+    return redirect('registro')
 
 def verPerfil(request, id):
     userPerf = Usuario.objects.get(idUsuario = id)
@@ -38,7 +78,7 @@ def verPost(request, id):
     postSel = Post.objects.get(idPost = id)
     userSel = Usuario.objects.get(idUsuario = postSel.usuario.idUsuario)
     comSel = Comentario.objects.filter(post = postSel)
-    userAct = Usuario.objects.get(idUsuario = 4)
+    userAct = Usuario.objects.get(idUsuario = 3)
     contexto = {
         "post" : postSel,
         "usuario" : userSel,
