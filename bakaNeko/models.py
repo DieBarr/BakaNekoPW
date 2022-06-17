@@ -17,6 +17,7 @@ from django.utils.translation import gettext_lazy as _
 def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
 
+
 class CustomAccountManager(BaseUserManager):
     def create_user(self, email, user_name, password, **other_fields):
 
@@ -30,23 +31,35 @@ class CustomAccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, user_name, password, **other_fields):
+        rol_admin = Rol.objects.get(idRol=1)
+        other_fields.setdefault('rol', rol_admin)
+        other_fields.setdefault('is_staff', True)
+        other_fields.setdefault('is_superuser', True)
 
-        other_fields.setdefault('rol', 1)
-
-        if other_fields.get('rol') != 1:
+        if other_fields.get('is_staff') is not True:
+            raise ValueError(
+                'Superuser must be assigned to is_staff=True.')
+        if other_fields.get('is_superuser') is not True:
+            raise ValueError(
+                'Superuser must be assigned to is_superuser=True.')
+        if other_fields.get('rol') is not rol_admin:
             raise ValueError(
                 'Superuser must be assigned to rol=1.')
 
         return self.create_user(email, user_name, password, **other_fields)
+
 class Rol(models.Model):
     idRol = models.AutoField(primary_key=True,verbose_name="Codigo rol")
     nombreRol = models.CharField(max_length=30,verbose_name="Nombre rol")
+
 
 class Tipo(models.Model):
     idTipo = models.AutoField(primary_key=True,verbose_name="Codigo del Tipo")
     nombreTipo = models.CharField(max_length=30,verbose_name="Nombre del Tipo")
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
+    #Rol.objects.create(nombreRol='admin')
+    #Rol.objects.create(nombreRol='usuario')
     email = models.EmailField(unique=True, verbose_name="Correo del Usuario")
     user_name = models.CharField(max_length=100, verbose_name="Nombre de Usuario")
     profile_pic = models.ImageField(
@@ -55,6 +68,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     register_date = models.DateTimeField(default=timezone.now)
 
+    is_staff = models.BooleanField(default=False)
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'
@@ -90,6 +104,7 @@ class Post(models.Model):
     razonPost = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tipo = models.ForeignKey(Tipo, on_delete=models.SET_NULL, null=True)
+
 class Comentario(models.Model):
     idCom = models.AutoField(primary_key=True, verbose_name="Codigo del Comentario")
     fechaCom = models.DateField(verbose_name="Fecha del comentario")
@@ -98,4 +113,3 @@ class Comentario(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.SET_DEFAULT, default="Activo")
     razonCom = models.CharField(max_length=100, null=True, verbose_name="Razon del Baneo")
     descCom = models.CharField(max_length=400, verbose_name="Contenido del comentario")
-

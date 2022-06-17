@@ -100,7 +100,7 @@
                 <div class="row" style="padding-top: 5%;">
                   <div class="col-md-2 col-sm-2" style="background-color: azure;">
                       <img src="{{ c.usuario.profile_pic.url }}" style="width: 50%; margin-left: 20%;">
-                      <a href="{% url 'verPerf' c.usuario.id %}" style="font-size: 90%;">{{ c.usuario.user_name }}</a>
+                      <a href="{% url 'profile' c.usuario.id %}" style="font-size: 90%;">{{ c.usuario.user_name }}</a>
                   </div>
                   <div class="col-md-10 col-sm-10">
                       <p>{{ c.descCom }}</p>

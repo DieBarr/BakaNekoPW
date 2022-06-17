@@ -147,7 +147,7 @@
                             <img src="{{ p.usuario.profile_pic.url }}" id="minifoto-usuario" alt="foto del usuario">
                         </li>
                           <li class="nav-item">
-                              <h1 id="subtexto-card"><a href="{% url 'verPerf' p.usuario.id %}" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.user_name }} </a></h1>
+                              <h1 id="subtexto-card"><a href="{% url 'profile' p.usuario.id %}" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.user_name }} </a></h1>
                           </li>
                           <li class="nav-item">
                               <h1 id="subtexto-card" style="padding-left:5px;"> en la fecha {{ p.fechaPost }}</h1>
