@@ -1,9 +1,64 @@
 from ast import For
-from django.shortcuts import get_object_or_404, render, redirect
-from .models import Usuario, Rol, Post, Comentario, Estado, Tipo
 from django.contrib import messages
-from django.contrib.auth import get_user_model
 import datetime
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.http.response import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import *
+from .forms import FormLoginUsuario, FormRegisUsuario
+
+def login_view(request):
+    login_form = FormLoginUsuario(request.POST or None)
+    if login_form.is_valid():
+        email = login_form.cleaned_data.get('email')
+        password = login_form.cleaned_data.get('contrasenia')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Has iniciado sesion correctamente')
+            return redirect('index')
+        else:
+            messages.warning(
+                request, 'Usuario o Contrasena invalida')
+            return redirect('index')
+
+    messages.error(request, 'Formulario Invalido')
+    return redirect('index')
+
+
+def signup_view(request):
+    signup_form = FormRegisUsuario(request.POST or None)
+    if signup_form.is_valid():
+        email = signup_form.cleaned_data.get('email')
+        user_name = signup_form.cleaned_data.get('user_name')
+        password = signup_form.cleaned_data.get('password')
+        try:
+            user = get_user_model().objects.create(
+                email=email,
+                user_name=user_name,
+                password=make_password(password),
+                rol = Rol.objects.get(idRol = 1)
+            )
+            login(request, user)
+            return redirect('index')
+
+        except Exception as e:
+            messages.warning(request, e)
+            return JsonResponse({'detail': f'{e}'})
+    else:
+        messages.warning(request, "Ocurrió un error desconocido")
+        return redirect('registro')
+        
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+
+@login_required(login_url='index')
+def profile_view(request, id):
+    usuario = get_user_model().objects.get(id = id)
+    return render(request, 'bakaNeko/perfil.html', { "usuario": usuario })
 
 def index(request):
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
@@ -22,18 +77,6 @@ def lista(request):
 def registro(request):
     return render(request,'bakaNeko/registro.html')
   
-def registrarUsuario(request):
-    pass
-def login(request):
-    pass
-
-def verPerfil(request, id):
-    userPerf = get_user_model().objects.get(id = id)
-    contexto ={
-        "usuario": userPerf,
-    }
-    return render(request, 'bakaNeko/perfil.html', contexto)
-    
 def verPost(request, id):
     postSel = Post.objects.get(idPost = id)
     userSel = get_user_model().objects.get(id = postSel.usuario.id)
@@ -65,17 +108,17 @@ def registrarPost(request, user):
     ##request.session['user'] = usuario_p
     if len(titulo_p) > 100:
         messages.error(request, "Error: El Asunto no puede tener más de 100 caracteres (╬ Ò﹏Ó)!")
-        return redirect('bakaNeko:nuevoPost')
+        return redirect('nuevoPost')
     else:
         try:
             img_p = request.FILES['imgPost']
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p, tipo=tipo_p2)
             messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('bakaNeko:index')
+            return redirect('index')
         except:
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p,  tipo=tipo_p2)
             messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('bakaNeko:index')
+            return redirect('index')
 
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']
@@ -88,7 +131,7 @@ def registrarComentario(request, id, user):
     
     messages.success(request, "Comentario creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
 
-    return redirect('bakaNeko:verPosts', id)
+    return redirect('verPosts', id)
 
 def secanime(request):
     posts = Post.objects.filter(tipo_id = 3)

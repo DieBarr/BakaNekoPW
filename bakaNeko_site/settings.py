@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bakaNeko',
-    'usuario',
     'django.contrib.humanize',
 ]
 
@@ -65,7 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'usuario.context_processors.login_form'
+                'bakaNeko.context_processors.login_form'
             ],
         },
     },
@@ -137,4 +136,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-AUTH_USER_MODEL = "usuario.UserProfile"
+AUTH_USER_MODEL = "bakaNeko.Usuario"

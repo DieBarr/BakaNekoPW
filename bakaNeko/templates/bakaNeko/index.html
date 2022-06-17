@@ -93,7 +93,7 @@
             
             <li class="nav-item">
               {% if user.is_authenticated %}
-              <a class="nav-link" href="{% url 'bakaNeko:nuevoPost' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+              <a class="nav-link" href="{% url 'nuevoPost' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                 height="16" fill="#26a269" class="bi bi-plus-square" viewBox="0 0 16 16">
                 <path
                   d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
@@ -103,7 +103,7 @@
                 </path>
               </svg> Nuevo Post</a>
               {% else %}
-              <a class="nav-link" href="{% url 'bakaNeko:registro' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+              <a class="nav-link" href="{% url 'registro' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="#26a269" class="bi bi-plus-square" viewBox="0 0 16 16">
                   <path
                     d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
@@ -147,14 +147,14 @@
                             <img src="{{ p.usuario.profile_pic.url }}" id="minifoto-usuario" alt="foto del usuario">
                         </li>
                           <li class="nav-item">
-                              <h1 id="subtexto-card"><a href="{% url 'bakaNeko:verPerf' p.usuario.id %}" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.user_name }} </a></h1>
+                              <h1 id="subtexto-card"><a href="{% url 'verPerf' p.usuario.id %}" style="text-decoration: none; color: rgb(56, 56, 56);">{{ p.usuario.user_name }} </a></h1>
                           </li>
                           <li class="nav-item">
                               <h1 id="subtexto-card" style="padding-left:5px;"> en la fecha {{ p.fechaPost }}</h1>
                           </li>
                       </ul>
                   </div>
-                  <a href="{% url 'bakaNeko:verPosts' p.idPost %}"><h5 id="texto-card" class="ps-1">{{ p.tituloPost }}</h5></a>
+                  <a href="{% url 'verPosts' p.idPost %}"><h5 id="texto-card" class="ps-1">{{ p.tituloPost }}</h5></a>
                   {% if p.imagenPost %}
                     <a href="{{ p.imagenPost.url }}"><img class="card-img-top" id="imgcard" src="{{ p.imagenPost.url }}" alt="No imagen"></a>
                   {% else %}
@@ -199,12 +199,12 @@
                         </h1>
                         <ul class="nav nav-pills pb-1 nav-fill sss">
                           <li class="nav-item">
-                            <a class="nav-link active _pill1" href="{% url 'bakaNeko:registro' %}">Registrarse</a>
+                            <a class="nav-link active _pill1" href="{% url 'registro' %}">Registrarse</a>
                           </li>
                         </ul>
                         <ul class="nav nav-pills pb-1 nav-fill">
                           <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'bakaNeko:registro' %}">Nuevo Post</a>
+                            <a class="nav-link active" href="{% url 'registro' %}">Nuevo Post</a>
                           </li>
                         </ul>
           

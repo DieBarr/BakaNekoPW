@@ -2,11 +2,42 @@ from pyexpat import model
 from tabnanny import verbose
 from django.conf import settings
 from django.db import models
-from usuario import *
+import random
+import string
 
-
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
+from django.urls import reverse
+import datetime
+from django.utils import timezone
+from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
+def rand_slug():
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
+
+class CustomAccountManager(BaseUserManager):
+    def create_user(self, email, user_name, password, **other_fields):
+
+        if not email:
+            raise ValueError(_('You must provide an email address'))
+
+        email = self.normalize_email(email)
+        user = self.model(email=email, user_name=user_name, **other_fields)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, email, user_name, password, **other_fields):
+
+        other_fields.setdefault('rol', 1)
+
+        if other_fields.get('rol') != 1:
+            raise ValueError(
+                'Superuser must be assigned to rol=1.')
+
+        return self.create_user(email, user_name, password, **other_fields)
 class Rol(models.Model):
     idRol = models.AutoField(primary_key=True,verbose_name="Codigo rol")
     nombreRol = models.CharField(max_length=30,verbose_name="Nombre rol")
@@ -15,13 +46,34 @@ class Tipo(models.Model):
     idTipo = models.AutoField(primary_key=True,verbose_name="Codigo del Tipo")
     nombreTipo = models.CharField(max_length=30,verbose_name="Nombre del Tipo")
 
-class Usuario(models.Model):
-    idUsuario = models.AutoField(primary_key=True, verbose_name="Codigo de Usuario")
-    nombreUsuario = models.CharField(max_length=30, verbose_name="Nombre de Usuario")
-    contrasenia = models.CharField(max_length=20, verbose_name="Contraseña del Usuario")
-    email = models.EmailField(max_length=30, verbose_name="Correo del Usuario")
-    fotoUsuario = models.ImageField(upload_to="fotoPerfiles", null=True)
-    rol = models.ForeignKey(Rol, on_delete=models.SET_DEFAULT, default="sinRol")
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True, verbose_name="Correo del Usuario")
+    user_name = models.CharField(max_length=100, verbose_name="Nombre de Usuario")
+    profile_pic = models.ImageField(
+        upload_to='fotoPerfiles/', default='fotoPerfiles/default.jpg', verbose_name="Foto del Usuario")
+    slug = models.SlugField(max_length=255, unique=True)
+
+    register_date = models.DateTimeField(default=timezone.now)
+
+    objects = CustomAccountManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['user_name']
+    
+    rol = models.ForeignKey(Rol, on_delete=models.SET_DEFAULT, default=0)
+    def __str__(self):
+        return f'{self.user_name}'
+
+    def get_absolute_url(self):
+        return reverse('user_detail', args=[self.slug])
+
+    def count_posts(self):
+        return Post.objects.filter(author=self).count()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(rand_slug() + "-" + self.email)
+        super(Usuario, self).save(*args, **kwargs)
 
 class Estado(models.Model):
     idEstado = models.AutoField(primary_key=True, verbose_name="Codigo de Status")
