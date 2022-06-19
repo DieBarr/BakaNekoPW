@@ -87,9 +87,9 @@ REST_FRAMEWORK={
 DATABASES={
     'default':{
         'ENGINE':'django.db.backends.oracle',
-        'NAME':'127.0.0.1:1521/xepdb1',
-        'USER':'pruebaxd',
-        'PASSWORD':'prueba',#Please provide the db password here
+        'NAME':'db20220606160725_high',
+        'USER':'admin',
+        'PASSWORD':'8985E2vX78tMUqvq',#Please provide the db password here
         'TEST':{
             'USER': 'default_test',
             'TBLSPACE':'default_test_tbls',

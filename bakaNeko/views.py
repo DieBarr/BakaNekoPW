@@ -49,8 +49,7 @@ def signup_view(request):
             return JsonResponse({'detail': f'{e}'})
     else:
         messages.warning(request, "Ocurrió un error desconocido")
-        return redirect('registro')
-        
+
 def logout_view(request):
     logout(request)
     return redirect('index')
