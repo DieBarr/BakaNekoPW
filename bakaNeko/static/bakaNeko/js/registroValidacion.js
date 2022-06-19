@@ -1,32 +1,27 @@
-var nombreUsuario = document.getElementById("nomUsuario");
-var clave = document.getElementById("contraUsuario");
-var claveRepetir = document.getElementById("repetirContra");
-var correo = document.getElementById("correoUsuario");
+var nombreUsuario = document.getElementById("user_name");
+var clave = document.getElementById("password");
+var claveRepetir = document.getElementById("password2");
+var correo = document.getElementById("email");
 var checkBox = document.getElementById("aceptarCheck");
 // Get the output text
 
-const form = document.getElementById("forma-registro");
-var mensaje = document.getElementById("warnings");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+var mensaje = document.getElementById("warnings") ;
+
+const validar = (event)  => {
+
+  event.preventDefault();
   let mensajesMostrar = "";
   let entrar = false;
-  let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+  let regexEmail =   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   let regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
   let mensajeResgistrado = "";
   if (nombreUsuario.value.length < 4 || nombreUsuario.value.length > 12) {
     mensajesMostrar +=
       "<div class='alert alert-danger'> <strong>El nombre de usuario no es válido (＃`Д´) !</strong> </div>";
-    entrar = true;
+    entrar = true
   }
 
-  if (!regexEmail.test(correo.value)) {
-    mensajesMostrar +=
-      "<div class='alert alert-danger'> <strong>El correo no es válido ((╬◣﹏◢)) !</strong> </div>";
-    entrar = true;
-  }
-
-  if (!regexPassword.test(clave.value)) {
+    if (!regexPassword.test(clave.value)) {
     mensajesMostrar +=
       "<div class='alert alert-danger'> <strong>La contraseña debe ser mayor a 8 caracteres y debe tener almenos un numero, una letra mayuscula y una minuscula ＼(º □ º l|l)/ !</strong> </div>";
     entrar = true;
@@ -47,5 +42,8 @@ form.addEventListener("submit", (e) => {
   } else {
     mensaje.innerHTML = mensajeResgistrado +=
       "<div class='alert alert-success'> <strong>Teregistraste correctamente, felicidades (っ˘ω˘ς ) !</strong> </div> <br>";
+    post()
+
   }
-});
+
+};

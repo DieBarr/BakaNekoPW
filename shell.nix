@@ -1,15 +1,23 @@
 # shell.nix
 ##Este archivo es para automatizar mi entorno de desarrollo en nixOS
 #--Diego--
-{ pkgs ? import <nixpkgs> {} }:
+# python.nix
+with (import <nixpkgs> {});
 let
-  python-with-my-packages = pkgs.python3.withPackages (p: with p; [
+  my-python-packages = python-packages: with python-packages; [
     pandas
     requests
     django
     cx_oracle
     pillow
     # other python packages you want
-  ]);
+  ];
+  python-with-my-packages = python3.withPackages my-python-packages;
 in
-python-with-my-packages.env # replacement for pkgs.mkShell
+mkShell {
+  buildInputs = [
+    python-with-my-packages
+    pkgs.microsoft-edge
+  ];
+}
+

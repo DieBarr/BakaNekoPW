@@ -64,19 +64,19 @@
     </div>
     <!-- Seccion para Registrarse -->
     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-      <form id="forma-registro" method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
+      <form id="forma-registro" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="text-center mb-3 form">
             <!-- Username input -->
           <div class="form-outline mb-4">
             {{ signupForm.user_name }}
-            <label class="form-label" for="signupUser">Nombre de usuario</label>
+            <label class="form-label" id="regUsuario" for="signupUser">Nombre de usuario</label>
           </div>
 
           <!-- Email input -->
           <div class="form-outline mb-4">
             {{ signupForm.email }}
-            <label class="form-label" for="signupEmail">Email</label>
+            <label class="form-label"  id="regCorreo" for="signupEmail">Email</label>
           </div>
           <!-- Image input -->
           <div class="form-outline mb-4">
@@ -86,13 +86,13 @@
           <!-- Password input -->
           <div class="form-outline mb-4">
             {{ signupForm.password }}
-            <label class="form-label" for="signupPassword">Contraseña</label>
+            <label class="form-label"  id="regContra" for="signupPassword">Contraseña</label>
           </div>
 
           <!-- Repeat Password input -->
           <div class="form-outline mb-4">
             {{ signupForm.password2 }}
-            <label class="form-label" for="repetirContra">Repetir contraseña</label>
+            <label class="form-label"  id="regRepcontra" for="repetirContra">Repetir contraseña</label>
           </div>
 
           <!-- Checkbox -->
@@ -107,7 +107,7 @@
 
   <p class="warnings" id="warnings"></p>
           <!-- Submit button -->
-          <button type="submit" id="submitBtn" class="btn btn-primary btn-block mb-3 btn-green">Registrar</button>
+          <button type="submit"  id="submitBtn" onclick="validar(event)"  class="btn btn-primary btn-block mb-3 btn-green">Registrar</button>
       </form>
     </div>
     <div class="tab-pane fade" id="pills-recover" role="tabpanel" aria-labelledby="tab-recover">
@@ -123,5 +123,10 @@
   </div>
   <!-- Pills content -->
 </div>
+
+
+  <script type="text/javascript" src="{% static 'bakaNeko/js/registroValidacion.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'bakaNeko/js/postMethod.js' %}"></script>
 
 {% endblock cuerpo %}
