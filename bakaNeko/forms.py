@@ -56,6 +56,7 @@ class FormRegisUsuario(forms.Form):
     password2 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
+                'id': 'password2',
                 'type': 'password',
                 'class': 'form-control'
             }
