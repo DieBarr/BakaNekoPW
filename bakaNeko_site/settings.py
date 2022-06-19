@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bakaNeko',
+    'api_rest',
     'django.contrib.humanize',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +75,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bakaNeko_site.wsgi.application'
 
+REST_FRAMEWORK={
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -79,8 +87,8 @@ WSGI_APPLICATION = 'bakaNeko_site.wsgi.application'
 DATABASES={
     'default':{
         'ENGINE':'django.db.backends.oracle',
-        'NAME':'127.0.0.1:1521/xepdb1',
-        'USER':'pruebaxd',
+        'NAME':'127.0.0.1:1521/xe',
+        'USER':'pruebaxd2',
         'PASSWORD':'prueba',#Please provide the db password here
         'TEST':{
             'USER': 'default_test',
