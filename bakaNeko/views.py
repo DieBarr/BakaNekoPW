@@ -22,7 +22,7 @@ def login_view(request):
         else:
             messages.warning(
                 request, 'Usuario o Contrasena invalida')
-            return redirect('index')
+            return redirect('registro')
 
     messages.error(request, 'Formulario Invalido')
     return redirect('index')
