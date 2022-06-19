@@ -134,7 +134,7 @@ def registrarComentario(request, id, user):
     return redirect('verPosts', id)
 
 def secanime(request):
-    posts = Post.objects.filter(tipo_id = 3)
+    posts = Post.objects.filter(tipo_id = 1)
 
     datos = {
     'posts' : posts
@@ -143,7 +143,7 @@ def secanime(request):
 
 def secjuegos(request):
     
-    posts = Post.objects.filter(tipo_id = 4)
+    posts = Post.objects.filter(tipo_id = 2)
 
     datos2 = {
     'posts' : posts
