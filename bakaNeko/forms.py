@@ -6,7 +6,7 @@ class FormLoginUsuario(forms.Form):
     email = forms.EmailField(
         widget=forms.TextInput(
             attrs={
-                'id':'email',
+                'id':'email1',
                 'type': 'email',
                 'class': 'form-control'
             }
