@@ -62,8 +62,10 @@ def profile_view(request, id):
 def index(request):
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
     posts_i = Post.objects.all()
+    tipos = Tipo.objects.all()
     contexto = {"postCarr":posts_car, 
-                "post":posts_i
+                "post":posts_i,
+                "tipo":tipos
     }
     return render(request,'bakaNeko/index.html', contexto)
 
@@ -118,7 +120,10 @@ def registrarPost(request, user):
             Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p,  tipo=tipo_p2)
             messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
             return redirect('index')
-
+def borrarPost(request, id):
+    post = Post.objects.get(idPost = id)
+    post.delete()
+    return redirect('index')
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']
     fecha_c = datetime.date.today()
