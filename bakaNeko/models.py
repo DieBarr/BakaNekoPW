@@ -89,6 +89,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
             self.slug = slugify(rand_slug() + "-" + self.email)
         super(Usuario, self).save(*args, **kwargs)
 
+
 class Estado(models.Model):
     idEstado = models.AutoField(primary_key=True, verbose_name="Codigo de Status")
     nombre = models.CharField(max_length=30, verbose_name="Tipo de status")

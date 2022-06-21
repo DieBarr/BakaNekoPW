@@ -50,6 +50,7 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<<<<<<< HEAD
           {% if user.is_authenticated %}
           <li class="nav-item">
             <img src="{{ user.profile_pic.url }}" id="minifoto-usuario">
@@ -64,6 +65,19 @@
               >Cerrar Sesión</a
             >
           </li>
+=======
+          {% url 'iniciar' as login %}
+          
+          {% if request.path == login %}
+
+          {% if user %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'verPerf' user.idUsuario %}"
+              >{{ user.nombreUsuario }}</a
+            >
+          </li>
+          {% endif %}
+>>>>>>> origin/main
           {% else %}
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'registro' %}"
@@ -75,7 +89,11 @@
             <a class="nav-link" aria-current="page" href="{% url 'registro' %}">
               Registrarse</a>
           </li>
+<<<<<<< HEAD
           {% endif %}
+=======
+          {% endif%}
+>>>>>>> origin/main
           <!-- definiendo urls para usarlo en condicionales y mostrar las secciones -->
           {% url 'secAnime' as sec_Anime %}
           {% url 'secJuegos' as sec_Juegos %}

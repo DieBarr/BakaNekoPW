@@ -17,17 +17,28 @@ from django.urls import path, include
 
 from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, secanime, secjuegos, login \
 
+<<<<<<< HEAD
 from . import views
+=======
+from bakaNeko.views import *
+
+app_name = 'bakaNeko'
+>>>>>>> origin/main
 
 
 urlpatterns = [
     path('', index, name='index'),
     path('registro/',registro,name='registro'),
+<<<<<<< HEAD
     path('login/', views.login_view, name='login'),
     path('profile/<int:id>', views.profile_view, name='profile'),
     path('signup/', views.signup_view, name='signup'),
     path('logout/', views.logout_view, name='logout'),
     path('posts', lista, name="listaPosts"),
+=======
+    path('reg', registrarUsuario, name='regUser'),
+    path('login', iniciarSesion, name='iniciar'),
+>>>>>>> origin/main
     path('posts/<int:id>', verPost, name='verPosts'),
     path('registrarCom/com_<int:id>_<str:user>', registrarComentario, name='registrarCom'),
     path('nuevoPost/', nuevoPost, name="nuevoPost"),

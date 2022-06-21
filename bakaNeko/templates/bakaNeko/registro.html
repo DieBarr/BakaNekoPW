@@ -9,6 +9,19 @@
   {% block cuerpo %}
 
 <div id="fondo">
+<<<<<<< HEAD
+=======
+  <!--Mensajes de confirmacion o error-->
+  {% if messages %}
+    {% for i in messages %}
+      {% if 'warning' in i.tags %}
+        <p><div class='alert alert-danger' role='alert'>{{ i }}</div></p>
+      {% elif 'success' in i.tags %}
+        <p><div class='alert alert-success' role='alert'>{{ i }}</div></p>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+>>>>>>> origin/main
   <!-- Pills navs -->
   <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
     <li class="nav-item" role="presentation">
@@ -25,19 +38,24 @@
   <!-- Pills content -->
   <div class="tab-content">
     <div class="tab-pane fade in show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+<<<<<<< HEAD
       <form id="login" action="{% url 'login' %}" method="POST" enctype="multipart/form-data">
+=======
+      <form id="login" action="{% url 'iniciar' %}" method="POST" enctype="multipart/form-data">
+>>>>>>> origin/main
         {% csrf_token %}
         <!-- Email input -->
         <div class="form-outline mb-4">
-          {{ loginForm.email }}
-          <label class="form-label" for="nomLogin">Correo</label>
+          <input type="text" name="nomLogin" id="nomLogin" class="form-control" required/>
+          <label class="form-label" for="nomLogin">Nombre de Usuario</label>
         </div>
 
         <!-- Password input -->
         <div class="form-outline mb-4">
-          {{ loginForm.contrasenia }}
+          <input type="password" name="contraLogin" id="contraLogin" class="form-control" required/>
           <label class="form-label" for="contraLogin">Contraseña</label>
         </div>
+
         <!-- 2 column grid layout -->
         <div class="row mb-4">
           <div class="col-md-6 d-flex justify-content-center">
@@ -69,6 +87,7 @@
 
         {% csrf_token %}
         <div class="text-center mb-3 form">
+<<<<<<< HEAD
             <!-- Username input -->
           <div class="form-outline mb-4">
             {{ signupForm.user_name }}
@@ -96,14 +115,44 @@
             {{ signupForm.password2 }}
             <label class="form-label"  id="regRepcontra" for="repetirContra">Repetir contraseña</label>
           </div>
+=======
+          <!-- Username input -->
+        <div class="form-outline mb-4">
+          <input type="text" name="nomUsuario" id="nomUsuario" class="form-control" />
+          <label class="form-label" for="nomUsuario">Nombre de usuario</label>
+        </div>
 
-          <!-- Checkbox -->
-          <div class="form-check d-flex justify-content-center mb-4">
-            <input class="form-check-input me-2" type="checkbox" value="" name="aceptarCheck" id="aceptarCheck" unchecked
-              aria-describedby="registerCheckHelpText" required/>
-            <label class="form-check-label" for="aceptarCheck">
-              Acepto estos términos
-            </label>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input type="email" name="correoUsuario" id="correoUsuario" class="form-control" required/>
+          <label class="form-label" for="correoUsuario">Email</label>
+        </div>
+        <!-- Image input -->
+        <div class="form-outline mb-4">
+          <input type="file" name="fotoPerfil" id="fotoPerfil" class="form-control" />
+          <label class="form-label" for="fotoPerfil">Foto de perfil</label>
+        </div>
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input type="password" name="contraUsuario" id="contraUsuario" class="form-control" required/>
+          <label class="form-label" for="contraUsuario">Contraseña</label>
+        </div>
+
+        <!-- Repeat Password input -->
+        <div class="form-outline mb-4">
+          <input type="password" name="repetirContra" id="repetirContra" class="form-control" required/>
+          <label class="form-label" for="repetirContra">Repetir contraseña</label>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="form-check d-flex justify-content-center mb-4">
+          <input class="form-check-input me-2" type="checkbox" value="" name="aceptarCheck" id="aceptarCheck" unchecked
+            aria-describedby="registerCheckHelpText" required/>
+          <label class="form-check-label" for="aceptarCheck">
+            Acepto estos términos
+          </label>
+>>>>>>> origin/main
+
 
           </div>
 
