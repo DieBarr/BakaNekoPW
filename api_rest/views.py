@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, get_user_model
 from .serializers import PostSerializer, ComSerializer, UserSerializer
 from bakaNeko.models import Post, Comentario, Usuario
 # Create your views here.
@@ -37,13 +38,35 @@ def lista_coment(request):
         serializer = ComSerializer(com, many=True)
         return Response(serializer.data)
 
-@api_view(['GET', 'DELETE', 'PUT'])
+@api_view(['GET', ])
 @permission_classes((IsAuthenticated,))
 def lista_users(request):
     if request.method == 'GET':
-        user = Usuario.objects.all()
+        user = get_user_model().objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
+@api_view(['GET', 'DELETE', 'PUT'])
+def control_users(request):
+    try:
+        user = get_user_model().objects.get(id = id)
+
+    except get_user_model().DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    if request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response(status = status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes((IsAuthenticated,))
