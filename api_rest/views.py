@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
-from .serializers import PostSerializer
-from bakaNeko.models import Post, Comentario
+from .serializers import PostSerializer, ComSerializer, UserSerializer
+from bakaNeko.models import Post, Comentario, Usuario
 # Create your views here.
 
 from rest_framework.authentication import TokenAuthentication
@@ -30,12 +30,21 @@ def lista_post(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def lista_coment(request):
     if request.method == 'GET':
         com = Comentario.objects.all()
         serializer = ComSerializer(com, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def lista_users(request):
+    if request.method == 'GET':
+        user = Usuario.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)
+        
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes((IsAuthenticated,))
 def control_post(request, id):
