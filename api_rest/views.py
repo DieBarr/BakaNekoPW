@@ -37,14 +37,14 @@ def lista_coment(request):
         serializer = ComSerializer(com, many=True)
         return Response(serializer.data)
 
-@api_view(['GET'])
+@api_view(['GET', 'DELETE', 'PUT'])
 @permission_classes((IsAuthenticated,))
 def lista_users(request):
     if request.method == 'GET':
         user = Usuario.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
-        
+
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes((IsAuthenticated,))
 def control_post(request, id):
