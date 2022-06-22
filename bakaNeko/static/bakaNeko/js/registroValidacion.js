@@ -46,7 +46,7 @@ const validar = (event)  => {
     mensaje.innerHTML = mensajesMostrar;
   } else {
     mensaje.innerHTML = mensajeResgistrado +=
-      "<div class='alert alert-success'> <strong>Teregistraste correctamente, felicidades (っ˘ω˘ς ) !</strong> </div> <br>";
+      "<div class='alert alert-success'> <strong>Te registraste correctamente, felicidades (っ˘ω˘ς ) !</strong> </div> <br>";
 
     document.getElementById('forma-registro').submit();
   }

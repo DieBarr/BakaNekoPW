@@ -267,6 +267,15 @@
           
                       <div class="card-body">
                        <h2 class="h5 card-title">Bienvenid@ a Bakaneko</h2>
+                        {% if user.is_authenticated %}
+                        <h1 class="h6">Disfruta de nuestra comunidad!!
+                        </h1>
+                        <ul class="nav nav-pills pb-1 nav-fill">
+                          <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="modal" data-bs-target="#Modal_Crear">Nuevo Post</button>
+                          </li>
+                        </ul>
+                        {% else %}
                         <h1 class="h6">Únete a nuestra comunidad y comparte tus gustos de anime/videojuegos con los demás!
                         </h1>
                         <ul class="nav nav-pills pb-1 nav-fill sss">
@@ -279,8 +288,7 @@
                             <a class="nav-link active" href="{% url 'registro' %}">Nuevo Post</a>
                           </li>
                         </ul>
-          
-          
+                        {% endif %}
                       </div>
                     </div>
                   </div>
