@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Usuario
 
 #Este es el formulario del login
 class FormLoginUsuario(forms.Form):
@@ -67,3 +67,5 @@ class FormRegisUsuario(forms.Form):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Las Contraseñas no coinciden')
         return cd['password2']
+
+
