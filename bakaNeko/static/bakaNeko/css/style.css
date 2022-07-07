@@ -375,3 +375,8 @@ h.navbar-brand {
 width: 1rem;
 
 }
+
+#modificarPerfil{
+  position: absolute;
+  top: 25px;
+}
