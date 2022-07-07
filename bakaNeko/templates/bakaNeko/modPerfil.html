@@ -1,6 +1,7 @@
 {% extends 'bakaNeko/includes/barraNav.html' %}
 
     {% load static %}
+    {% load crispy_forms_tags %}
 
     {% block usuario %}
 
@@ -9,7 +10,8 @@
     {% endblock titulo %}
 
     {% block cuerpo %}
-    <div class="container">
+
+    <div class="container" style="margin-top: 5px;">
       <div class="main-body" 
       style="background: url('{{ usuario.profile_pic.url }}') no-repeat;
           background-size: cover;
@@ -19,24 +21,24 @@
           <div class="col-md-6 mb-3">
             <div class="card">
               <div class="card-body">
-                {% if user.is_authenticated %}
-                  {% if user == usuario %}
-                  <a class="btn btn-primary" href="" role="button">Editar</a>
-                  {% elif user.is_staff %}
-                  <a class="btn btn-danger" href="" role="button">Banear</a>
-                  {% endif %}
-                {% endif %}
                 <div class="d-flex flex-column align-items-center text-center">
-                  
+                  <div title="Cambiar foto" class="btn pb-0" data-bs-toggle="modal" data-bs-target="#Modal_ModificarFoto">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="position: static; color:green; " width="26" height="26" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                      <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                  </div>
                   <img
                     src="{{ usuario.profile_pic.url }}"
                     alt="Foto de perfil"
                     class="rounded-circle"
                     width="250"
                   />
-                  
                   <div class="mt-3">
-                    <h4>{{ usuario.user_name }}</h4>
+                    <h4>{{ usuario.user_name }} <div style="margin-left: -15px;" class="btn btn-sm" data-bs-toggle="modal"  title="Cambiar nombre" data-bs-target="#Modal_ModificarNombre"><svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg></div></h4>
                     <p class="text-secundary mb-1">Anime/Videojuegos</p>
                   </div>
                 </div>
@@ -44,6 +46,8 @@
             </div>
           </div>
           <div class="col-md-3"></div>
+
+ 
           
           
         </div>
@@ -159,6 +163,70 @@
                 </div>
               </div>
             </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODALS -->
+    <div class="modal fade" id="Modal_ModificarNombre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'modificarperfil' usuario.id 1 %}" id="form_post" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row" style="padding-top:10px">
+
+                <div class="col-md-12 col-sm-12">
+
+                  <!--Datos para el formulario-->
+                  <!-- PARA MODIFICAR NOMBRE DE USUARIO-->
+                  <label style="color:black" for="modifnombre" class="label-post">Ingresa el nuevo nombre de usuario:</label>
+                  <input type="text" class="form-control input-post" name="modifnombre" id="modifnombre" required>                  
+                  <!--submit para el formulario-->
+                  <button class="btn btn-primary btn-green btn-large" type="submit">Confirmar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="Modal_ModificarFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+              <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+              <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
+            </svg>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'modificarperfil' usuario.id 2  %}" id="form_post" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row" style="padding-top:10px">
+
+                <div class="col-md-10 col-sm-10 pt-0">
+
+                  <!--Datos para el formulario-->
+                  <!-- PARA MODIFICAR FOTO DE USUARIO-->
+                  <label style="color:black; font-size: medium;" for="modifoto" class="label-post">Escoge la foto con la que quieres que te reconozcan</label>
+                  <input type="file" class="form-control" name="modifoto" id="modifoto">
+
+                  <!--submit para el formulario-->
+                  <button class="btn btn-primary btn-green mt-2" type="submit">Confirmar</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

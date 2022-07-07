@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.urls import path, include
 
-from .views import index, lista, registro, verPost, registrarComentario, nuevoPost, registrarPost, secanime, secjuegos, login \
+from .views import index, lista, modificar_perfil, registro, verPost, registrarComentario, nuevoPost, registrarPost, secanime, modificar_perfil, secjuegos, login, profile_Modify\
+    
+    
 
 from . import views
 
@@ -36,4 +38,6 @@ urlpatterns = [
     path('publicar/<str:user>', registrarPost, name="registrarPost"),
     path('secAnime/', secanime, name='secAnime'),
     path('secVideojuegos/', secjuegos, name='secJuegos'),
+    path('modPerfil/<int:id>',views.profile_Modify, name='modPerfil'),
+    path('modificar/<int:id><int:opc>', modificar_perfil, name="modificarperfil")
 ]

@@ -370,10 +370,14 @@ h.navbar-brand {
   max-width: 1.5rem;
   max-height: 1.5rem;
   border-radius: 50%;
-  margin-bottom: 5%;
   align-items: center;
 }
 #espaciador {
 width: 1rem;
 
+}
+
+#modificarPerfil{
+  position: absolute;
+  top: 25px;
 }

@@ -20,8 +20,7 @@ def login_view(request):
             messages.success(request, 'Has iniciado sesion correctamente')
             return redirect('index')
         else:
-            messages.warning(
-                request, 'Usuario o Contrasena invalida')
+            messages.error(request, "Error: Usuario o contraseña inválidos (╬ Ò﹏Ó)!")
             return redirect('registro')
 
     messages.error(request, 'Formulario Invalido')
@@ -44,12 +43,12 @@ def signup_view(request):
             login(request, user)
             return redirect('index')
 
-        except Exception as e:
-            messages.warning(request, e)
-            return JsonResponse({'detail': f'{e}'})
+        except:
+            messages.warning(request, "Ocurrió un error desconocido")
+            return redirect('registro')
     else:
         messages.warning(request, "Ocurrió un error desconocido")
-
+        return redirect('registro')
 def logout_view(request):
     logout(request)
     return redirect('index')
@@ -58,6 +57,7 @@ def logout_view(request):
 def profile_view(request, id):
     usuario = get_user_model().objects.get(id = id)
     return render(request, 'bakaNeko/perfil.html', { "usuario": usuario })
+
 
 def index(request):
     posts_car = Post.objects.filter(fechaPost = datetime.date.today())
@@ -142,6 +142,7 @@ def registrarComentario(request, id, user):
 
     return redirect('verPosts', id)
 
+
 def secanime(request):
     posts = Post.objects.filter(tipo_id = 1)
 
@@ -160,3 +161,30 @@ def secjuegos(request):
 
 
     return render(request,'bakaNeko/secVideojuegos.html', datos2)
+
+@login_required(login_url='index')
+def profile_Modify(request, id):
+    usuario1 = get_user_model().objects.get(id = id)
+    
+    contexto = {
+        'usuario': usuario1, 
+    }
+    return render(request, 'bakaNeko/modPerfil.html', contexto)
+
+def modificar_perfil(request,id,opc):
+    usuario2 = get_user_model().objects.get(id = id)
+    if opc==1:        
+        newnombre = request.POST['modifnombre']
+        usuario2.user_name = newnombre
+    else:
+        newfoto = request.FILES['modifoto']
+        usuario2.profile_pic = newfoto
+    
+    usuario2.save()
+
+    messages.success(request, 'Perfil modificado correctamente!')
+    return redirect('profile',id)
+
+
+
+    

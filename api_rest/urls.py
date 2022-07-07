@@ -6,6 +6,8 @@ appName = 'api'
 
 urlpatterns = [
     path('lista_post/',lista_post,name="lista_post"),
+    path('lista_comentario/',lista_comentario,name="lista_comentario"),
+    path('lista_usuario/',lista_usuario,name="lista_usuario"),
     path('control_post/<id>',control_post,name="control_post"),
     path('control_users/<id>', control_users, name="control_usuarios"),
     path('login',loginApi,name="loginApi"),
