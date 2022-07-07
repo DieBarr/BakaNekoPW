@@ -75,6 +75,11 @@ def lista(request):
     contexto = {"post":posts, "comentario":coments}
     return render(request, 'bakaNeko/listaPosts.html', contexto)
 
+def listaUser(request):
+    usuarios = get_user_model().objects.all().order_by('id').values()
+    contexto = {"usuario": usuarios }
+    return render(request, 'bakaNeko/listaUsuarios.html', contexto)
+
 def registro(request):
     return render(request,'bakaNeko/registro.html')
   

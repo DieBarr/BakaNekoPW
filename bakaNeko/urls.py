@@ -28,6 +28,7 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('logout/', views.logout_view, name='logout'),
     path('posts', lista, name="listaPosts"),
+    path('usuarios', views.listaUser, name="listaUsers"),
     path('posts/<int:id>', verPost, name='verPosts'),
     path('registrarCom/com_<int:id>_<str:user>', registrarComentario, name='registrarCom'),
     path('nuevoPost/', nuevoPost, name="nuevoPost"),
