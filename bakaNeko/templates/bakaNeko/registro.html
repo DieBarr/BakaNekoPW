@@ -5,6 +5,7 @@
   <title>BakaNeko - Registro</title>
   {% endblock titulo%}
 
+
   {% block cuerpo %}
 
 <div id="fondo">
@@ -47,6 +48,20 @@
             </div>
           </div>
 
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    
+<div {% if message.tags %} class=" alert alert-danger"{% endif %}>
+  <strong>
+
+	    {{ message }}
+  </strong>
+</div>
+
+    {% endfor %}
+</div>
+{% endif %}
           <div class="col-md-6 d-flex justify-content-center">
             <!-- Simple link -->
             <a href="#pills-recover">Olvidaste tu contraseña?</a>
@@ -65,6 +80,7 @@
     <!-- Seccion para Registrarse -->
     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
       <form id="forma-registro" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+
         {% csrf_token %}
         <div class="text-center mb-3 form">
             <!-- Username input -->
@@ -105,9 +121,24 @@
 
           </div>
 
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    
+<div {% if message.tags %} class=" alert alert-danger"{% endif %}>
+  <strong>
+
+	    {{ message }}
+  </strong>
+</div>
+
+    {% endfor %}
+</div>
+{% endif %}
+
   <p class="warnings" id="warnings"></p>
           <!-- Submit button -->
-          <button type="submit"  id="submitBtn" onclick="validar(event)"  class="btn btn-primary btn-block mb-3 btn-green">Registrar</button>
+          <button type="button"  id="submitBtn" onclick="validar(event)"  class="btn btn-primary btn-block mb-3 btn-green">Registrar</button>
       </form>
     </div>
     <div class="tab-pane fade" id="pills-recover" role="tabpanel" aria-labelledby="tab-recover">
@@ -125,8 +156,8 @@
 </div>
 
 
-  <script type="text/javascript" src="{% static 'bakaNeko/js/registroValidacion.js' %}"></script>
+  <script  src="{% static 'bakaNeko/js/registroValidacion.js' %}"></script>
 
-  <script type="text/javascript" src="{% static 'bakaNeko/js/postMethod.js' %}"></script>
+
 
 {% endblock cuerpo %}

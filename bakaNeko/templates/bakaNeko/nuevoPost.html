@@ -9,7 +9,7 @@
   {% block cuerpo %}
   
   <div id="fondo">
-  <form action="{% url 'registrarPost' user.user_name %}" id="form_post" method="POST" enctype="multipart/form-data">
+  <form action="{% url 'registrarPost' user.user_name %}" id="forma-post" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
    <div id="fondo">
     <div class="row" style="padding-top:10px">
@@ -34,13 +34,9 @@
           {% endfor %}
         </select>
         <!--Mensaje de confirmacion o rechazo-->
-        {% if messages %}
-            {% for i in messages %}
-            <p><br><div class='alert alert-danger' role='alert'>{{ i }}</div></p>
-            {% endfor %}
-        {% endif %}
+            <p class="warnings" id="warnings"></p>
         <!--submit para el formulario-->
-        <button class="btn btn-primary btn-green btn-large" type="submit">Confirmar</button>
+        <button class="btn btn-primary btn-green btn-large" type="button" onclick="validar(event)">Confirmar</button>
 
         <!--Para confirmar que los datos fueron enviados, se creó esta vista previa-->
         <div class="container-fluid redondear" id="container-post">
@@ -50,4 +46,6 @@
     </div>
   </form>
   </div>
-  {% endblock cuerpo %} 
+
+  <script  src="{% static 'bakaNeko/js/postValidacion.js' %}"></script>
+  {% endblock cuerpo %}
