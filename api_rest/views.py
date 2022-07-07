@@ -31,43 +31,38 @@ def lista_post(request):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 @permission_classes((IsAuthenticated,))
-def lista_coment(request):
+def lista_comentario(request):
     if request.method == 'GET':
         com = Comentario.objects.all()
         serializer = ComSerializer(com, many=True)
         return Response(serializer.data)
-
-@api_view(['GET', ])
-@permission_classes((IsAuthenticated,))
-def lista_users(request):
-    if request.method == 'GET':
-        user = get_user_model().objects.all()
-        serializer = UserSerializer(user, many=True)
-        return Response(serializer.data)
-@api_view(['GET', 'DELETE', 'PUT'])
-def control_users(request):
-    try:
-        user = get_user_model().objects.get(id = id)
-
-    except get_user_model().DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == 'GET':
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-    if request.method == 'PUT':
+    elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = UserSerializer(user, data=data)
+        serializer = ComSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        user.delete()
-        return Response(status = status.HTTP_204_NO_CONTENT)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','POST'])
+@permission_classes((IsAuthenticated,))
+def lista_usuario(request):
+    if request.method == 'GET':
+        user = Usuario.objects.all()
+        serializer =UserSerializer(user, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes((IsAuthenticated,))
@@ -77,12 +72,12 @@ def control_post(request, id):
 
     except Post.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
+
     if request.method == 'GET':
         serializer = PostSerializer(p)
         return Response(serializer.data)
     if request.method == 'PUT':
-        data = JSONParser().parse(request)       
+        data = JSONParser().parse(request)
 
         serializer = PostSerializer(p, data=data)
         if serializer.is_valid():
@@ -105,12 +100,12 @@ def control_comentario(request, id):
 
     except Comentario.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
+
     if request.method == 'GET':
         serializer = ComSerializer(c)
         return Response(serializer.data)
     if request.method == 'PUT':
-        data = JSONParser().parse(request)       
+        data = JSONParser().parse(request)
 
         serializer = ComSerializer(c, data=data)
         if serializer.is_valid():
@@ -133,12 +128,12 @@ def control_usuario(request, id):
 
     except Usuario.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
+
     if request.method == 'GET':
         serializer = UserSerializer(u)
         return Response(serializer.data)
     if request.method == 'PUT':
-        data = JSONParser().parse(request)       
+        data = JSONParser().parse(request)
 
         serializer = UserSerializer(u, data=data)
         if serializer.is_valid():
@@ -146,6 +141,3 @@ def control_usuario(request, id):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
-
-
