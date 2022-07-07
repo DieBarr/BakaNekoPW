@@ -48,6 +48,20 @@
             </div>
           </div>
 
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    
+<div {% if message.tags %} class=" alert alert-danger"{% endif %}>
+  <strong>
+
+	    {{ message }}
+  </strong>
+</div>
+
+    {% endfor %}
+</div>
+{% endif %}
           <div class="col-md-6 d-flex justify-content-center">
             <!-- Simple link -->
             <a href="#pills-recover">Olvidaste tu contraseña?</a>
@@ -106,6 +120,21 @@
             </label>
 
           </div>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    
+<div {% if message.tags %} class=" alert alert-danger"{% endif %}>
+  <strong>
+
+	    {{ message }}
+  </strong>
+</div>
+
+    {% endfor %}
+</div>
+{% endif %}
 
   <p class="warnings" id="warnings"></p>
           <!-- Submit button -->

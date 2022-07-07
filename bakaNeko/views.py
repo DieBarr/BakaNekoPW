@@ -20,8 +20,7 @@ def login_view(request):
             messages.success(request, 'Has iniciado sesion correctamente')
             return redirect('index')
         else:
-            messages.warning(
-                request, 'Usuario o Contrasena invalida')
+            messages.error(request, "Error: Usuario o contraseña inválidos (╬ Ò﹏Ó)!")
             return redirect('registro')
 
     messages.error(request, 'Formulario Invalido')
@@ -44,12 +43,12 @@ def signup_view(request):
             login(request, user)
             return redirect('index')
 
-        except Exception as e:
-            messages.warning(request, e)
-            return JsonResponse({'detail': f'{e}'})
+        except:
+            messages.warning(request, "Ocurrió un error desconocido")
+            return redirect('registro')
     else:
         messages.warning(request, "Ocurrió un error desconocido")
-
+        return redirect('registro')
 def logout_view(request):
     logout(request)
     return redirect('index')

@@ -21,6 +21,12 @@ const validar = (event)  => {
 
     entrar = true;
   }
+if (asunto.value.length < 0) {
+ mensajesMostrar +=
+      "<br><div class='alert alert-danger' role='alert'>Error: El Asunto no puede quedar vacio (╬ Ò﹏Ó)!</div>";
+
+    entrar = true;
+  }
 
 if (entrar) {
     mensaje.innerHTML = mensajesMostrar;
