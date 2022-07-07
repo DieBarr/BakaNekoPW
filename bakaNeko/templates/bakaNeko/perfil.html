@@ -21,7 +21,7 @@
               <div class="card-body">
                 {% if user.is_authenticated %}
                   {% if user == usuario %}
-                  <a class="btn btn-primary" href="{% url 'modPerfil' user.id %}" role="button">Editar</a>
+                  <a class="btn btn-primary" href="" role="button">Editar</a>
                   {% elif user.is_staff %}
                   <a class="btn btn-danger" href="" role="button">Banear</a>
                   {% endif %}

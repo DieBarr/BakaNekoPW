@@ -211,7 +211,7 @@ h.navbar-brand {
 }
 
 .label-post {
-  color: #ffffff;
+  color: #000000;
   font-size: 125%;
   padding: 0.5%;
 }
@@ -344,7 +344,8 @@ h.navbar-brand {
 }
 #card-ajustes{  
   border-radius: 25px;
-  max-width: 70%;
+  max-width: 90%;
+  margin-top: 2%;
 
     
 }

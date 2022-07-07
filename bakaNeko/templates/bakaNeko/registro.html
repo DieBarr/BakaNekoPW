@@ -8,6 +8,13 @@
 
   {% block cuerpo %}
 
+  {% if messages %}
+{% for i in messages %}
+<p>
+<div class='alert alert-success' role='alert'>{{ i }}</div>
+</p>
+{% endfor %}
+{% endif %}
 <div id="fondo">
   <!-- Pills navs -->
   <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -138,26 +145,14 @@
 
   <p class="warnings" id="warnings"></p>
           <!-- Submit button -->
-          <button type="button"  id="submitBtn" onclick="validar(event)"  class="btn btn-primary btn-block mb-3 btn-green">Registrar</button>
-      </form>
-    </div>
-    <div class="tab-pane fade" id="pills-recover" role="tabpanel" aria-labelledby="tab-recover">
-      <form>
-        <div class="form-outline mb-4">
-          <input type="email" name="correoRec" id="correoRec" class="form-control" required/>
-          <label class="form-label" for="correoRec">Ingresa el Email del Usuario que olvidaste</label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block mb-3 btn-green">Verificar</button>
-      </form>
-      <a href="#pills-login">Volver</a>
+          <button type="button"  id="submitBtn" onclick="validar(event)" class="btn btn-primary btn-block mb-3 btn-green">Registrar</button>
+          <button type="submit" hidden="hidden"></button>
+        </form>
     </div>
   </div>
   <!-- Pills content -->
 </div>
 
-
-  <script  src="{% static 'bakaNeko/js/registroValidacion.js' %}"></script>
-
-
+<script src="{% static 'bakaNeko/js/registroValidacion.js' %}"></script>
 
 {% endblock cuerpo %}

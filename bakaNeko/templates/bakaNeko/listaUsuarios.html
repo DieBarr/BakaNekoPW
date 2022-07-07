@@ -1,0 +1,34 @@
+{% extends 'bakaNeko/includes/barraNav.html' %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="padding:10%;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Correo</th>
+                    <th>Fecha de registro</th>
+                    <th>Admin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuario %} 
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.user_name }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.register_date }}</td>
+                    <td>{{ u.is_staff }}</td>
+                    <td><a href="" class="btn btn-danger">Banear</a></td>
+                </tr>
+            
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

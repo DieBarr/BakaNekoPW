@@ -15,7 +15,7 @@ const validar = (event)  => {
   let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   let regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
   let mensajeResgistrado = "";
-  if (nombreUsuario.value.length < 4 || nombreUsuario.value.length > 12) {
+  if (nombreUsuario.value.length < 4 || nombreUsuario.value.length > 20) {
     mensajesMostrar +=
       "<div class='alert alert-danger'> <strong>El nombre de usuario no es válido (＃`Д´) !</strong> </div>";
     entrar = true
@@ -46,8 +46,8 @@ const validar = (event)  => {
     mensaje.innerHTML = mensajesMostrar;
   } else {
     mensaje.innerHTML = mensajeResgistrado +=
-		     //"<div class='alert alert-success'> <strong>Teregistraste correctamente, felicidades (っ˘ω˘ς ) !</strong> </div> <br>";
-"<div class='spinner-border text-success'></div>";
+      "<div class='alert alert-success'> <strong>Te registraste correctamente, felicidades (っ˘ω˘ς ) !</strong> </div> <br>";
+
     document.getElementById('forma-registro').submit();
   }
 

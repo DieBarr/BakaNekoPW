@@ -14,4 +14,4 @@ class ComSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ['email', 'user_name', 'profile_pic', 'register_date', 'is_staff', 'id']
+        fields = ['email', 'user_name', 'profile_pic', 'register_date', 'is_staff']

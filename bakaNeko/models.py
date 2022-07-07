@@ -105,6 +105,9 @@ class Post(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tipo = models.ForeignKey(Tipo, on_delete=models.SET_NULL, null=True)
 
+    def count_com(self):
+        return Comentario.objects.filter(post_id = self.idPost).count()
+
 class Comentario(models.Model):
     idCom = models.AutoField(primary_key=True, verbose_name="Codigo del Comentario")
     fechaCom = models.DateField(verbose_name="Fecha del comentario")
