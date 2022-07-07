@@ -40,6 +40,7 @@ def lista_comentario(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        data['usuario'] = request.user.id
         serializer = ComSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

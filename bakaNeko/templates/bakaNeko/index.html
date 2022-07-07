@@ -143,7 +143,7 @@
 
                       <label for="desc_post" class="label-post">Descripcion</label>
                       <textarea type="text" class="form-control" rows="5" name="descPost" id="desc_post"></textarea>
-
+                      <label for="tipoSel" class="label-post">Tipo de publicación</label>
                       <select name="tipoSel" id="tipoSel">
                         {% for t in tipo %}
                         <option value="{{ t.idTipo }}">{{ t.nombreTipo }}</option>
