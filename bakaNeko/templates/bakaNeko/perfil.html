@@ -9,6 +9,13 @@
     {% endblock titulo %}
 
     {% block cuerpo %}
+    {% if messages %}
+    {% for i in messages %}
+    <p>
+    <div class='alert alert-success' role='alert'>{{ i }}</div>
+    </p>
+    {% endfor %}
+    {% endif %}
     <div class="container">
       <div class="main-body" 
       style="background: url('{{ usuario.profile_pic.url }}') no-repeat;
@@ -22,8 +29,8 @@
                 {% if user.is_authenticated %}
                   {% if user == usuario %}
                   <a class="btn btn-primary btn-green" href="{% url 'modPerfil' usuario.id %}" role="button">Editar</a>
-                  {% elif user.rol_id == 1 %}
-                  <a class="btn btn-danger" href="" role="button">Banear</a>
+                  {% elif user.is_staff %}
+                  <a class="btn btn-danger" href="{% url 'banearUser' usuario.id 1 'index' %}" role="button">Banear</a>
                   {% endif %}
                 {% endif %}
                 <div class="d-flex flex-column align-items-center text-center">

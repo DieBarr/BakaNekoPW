@@ -1,4 +1,3 @@
-
 from django.urls import path
 from api_rest.views import lista_post, control_post, control_comentario, control_usuario, lista_comentario, lista_usuario
 from api_rest.viewsLogin import loginApi
