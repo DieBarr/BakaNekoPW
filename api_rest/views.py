@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import authenticate, get_user_model
 from .serializers import PostSerializer, ComSerializer, UserSerializer
 from bakaNeko.models import Post, Comentario, Usuario
 # Create your views here.
@@ -72,12 +71,12 @@ def control_post(request, id):
 
     except Post.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
+    
     if request.method == 'GET':
         serializer = PostSerializer(p)
         return Response(serializer.data)
     if request.method == 'PUT':
-        data = JSONParser().parse(request)
+        data = JSONParser().parse(request)       
 
         serializer = PostSerializer(p, data=data)
         if serializer.is_valid():
@@ -100,12 +99,12 @@ def control_comentario(request, id):
 
     except Comentario.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
+    
     if request.method == 'GET':
         serializer = ComSerializer(c)
         return Response(serializer.data)
     if request.method == 'PUT':
-        data = JSONParser().parse(request)
+        data = JSONParser().parse(request)       
 
         serializer = ComSerializer(c, data=data)
         if serializer.is_valid():
@@ -128,12 +127,12 @@ def control_usuario(request, id):
 
     except Usuario.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
+    
     if request.method == 'GET':
         serializer = UserSerializer(u)
         return Response(serializer.data)
     if request.method == 'PUT':
-        data = JSONParser().parse(request)
+        data = JSONParser().parse(request)       
 
         serializer = UserSerializer(u, data=data)
         if serializer.is_valid():
@@ -141,3 +140,6 @@ def control_usuario(request, id):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+
+
