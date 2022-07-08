@@ -87,6 +87,9 @@
     <div class="row">
       <div class="col-md-11 col-sm-12">
         <ul class="nav nav-pills pb-1">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="pill" href="#nuevo">Nuevo</a>
+          </li>
 
           <li class="nav-item">
             {% if user.is_authenticated %}
@@ -124,7 +127,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form method="{% url 'registrarPost' user.user_name %}" id="forma-post" method="POST"
+                <form action="{% url 'registrarPost' user.user_name %}" id="form_post" method="POST"
                   enctype="multipart/form-data">
                   {% csrf_token %}
                   <div class="row" style="padding-top:10px">
@@ -140,6 +143,7 @@
 
                       <label for="desc_post" class="label-post">Descripcion</label>
                       <textarea type="text" class="form-control" rows="5" name="descPost" id="desc_post"></textarea>
+
                       <label for="tipoSel" class="label-post">Tipo de publicación</label>
                       <select name="tipoSel" id="tipoSel">
                         {% for t in tipo %}
@@ -147,9 +151,10 @@
                         {% endfor %}
                       </select>
                       <!--Mensaje de confirmacion o rechazo-->
-                        <p class="warnings" id="warnings"></p>
+                      <p class="warnings" id="warnings"></p>
                       <!--submit para el formulario-->
                       <button class="btn btn-primary btn-green btn-large" type="button" onclick="validar(event)">Confirmar</button>
+
                       <!--Para confirmar que los datos fueron enviados, se creó esta vista previa-->
                       <div class="container-fluid redondear" id="container-post">
                       </div>
@@ -176,7 +181,7 @@
                       <h1 id="seccion">{{ p.tipo.nombreTipo }}</h1>
                     </li>
                     <li class="nav-item">
-                      <h1 class="mt-1 ms-2" id="subtexto-card"></h1>
+                      <h1 class="mt-1 ms-2" id="subtexto-card">~</h1>
                     </li>
 
                     <li class="nav-item">
@@ -198,9 +203,9 @@
                     <li class="nav-item">
                       <h1 id="subtexto-card" style="padding-left:5px;"> en la fecha {{ p.fechaPost }}</h1>
                     </li>
-                    {% if user.rol_id == 1 or user.id == p.usuario_id %}
+                    {% if user.is_staff %}
                     <li class="nav-item">
-                      <button style="margin-left: 50%;" class="btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#Modal_Confirm"><svg
+                      <button class="btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#Modal_Confirm"><svg
                           xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                           class="bi bi-trash3" viewBox="0 0 16 16">
                           <path
@@ -354,12 +359,9 @@
               </aside>
             </div>
             <!--FIN TABLA DEL LADO-->
-
-
-
-
           </div>
         </div>
       </div>
     </div>
+    
     {% endblock cuerpo%}
