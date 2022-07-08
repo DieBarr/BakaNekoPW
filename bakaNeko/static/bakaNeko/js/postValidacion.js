@@ -36,5 +36,5 @@ if (entrar) {
     mensaje.innerHTML = mensajeResgistrado +=
       "<br><div class='alert alert-success' role='alert'>Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!</div>";
 
-    document.getElementById('forma-post').submit();  }
+    document.getElementById('form_post').submit();  }
 };
