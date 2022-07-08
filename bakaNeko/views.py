@@ -38,7 +38,7 @@ def signup_view(request):
                 email=email,
                 user_name=user_name,
                 password=make_password(password),
-                rol = Rol.objects.get(idRol = 1)
+                rol = Rol.objects.get(idRol = 2)
             )
             login(request, user)
             return redirect('index')
@@ -112,19 +112,15 @@ def registrarPost(request, user):
     usuario_p = get_user_model().objects.get(user_name = user)
     est_p = Estado.objects.get(nombre="activo")
     ##request.session['user'] = usuario_p
-    if len(titulo_p) > 100:
-        messages.error(request, "Error: El Asunto no puede tener más de 100 caracteres (╬ Ò﹏Ó)!")
-        return redirect('nuevoPost')
-    else:
-        try:
-            img_p = request.FILES['imgPost']
-            Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p, tipo=tipo_p2)
-            messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('index')
-        except:
-            Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p,  tipo=tipo_p2)
-            messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
-            return redirect('index')
+    try:
+        img_p = request.FILES['imgPost']
+        Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, imagenPost=img_p, estado=est_p, usuario=usuario_p, tipo=tipo_p2)
+        messages.error(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
+        return redirect('index')
+    except:
+        Post.objects.create(fechaPost=fecha_p, tituloPost=titulo_p, descPost=desc_p, estado=est_p, usuario=usuario_p,  tipo=tipo_p2)
+        messages.success(request, "Post creado correctamente felicidades ☆*:.｡.o(≧▽≦)o.｡.:*☆!")
+        return redirect('index')
 def borrarPost(request, id):
     post = Post.objects.get(idPost = id)
     post.delete()

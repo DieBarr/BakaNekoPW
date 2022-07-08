@@ -1,6 +1,8 @@
 {% extends 'bakaNeko/includes/barraNav.html' %}
 
 {% block cuerpo %}
+
+{% if user.rol_id == 1 %}
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10" style="padding:10%;">
@@ -22,7 +24,7 @@
                     <td>{{ u.user_name }}</td>
                     <td>{{ u.email }}</td>
                     <td>{{ u.register_date }}</td>
-                    <td>{{ u.is_staff }}</td>
+                    <td>{{ u.rol_id }}</td>
                     <td><a href="" class="btn btn-danger">Banear</a></td>
                 </tr>
             
@@ -30,5 +32,8 @@
             </tbody>
         </table>
     </div>
+{% else %}
+    <label>Esta vista es solo para Administradores!!!</label>
+{% endif %}
 
 {% endblock %}

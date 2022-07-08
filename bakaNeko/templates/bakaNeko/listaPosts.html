@@ -2,7 +2,7 @@
 
 {% block cuerpo %}
 <!-- Mostrando contenido de la tabla Posts -->
-{% if user.is_staff %}
+{% if user.rol_id == 1 %}
 
 <div class="row">
     <div class="col-md-1"></div>
