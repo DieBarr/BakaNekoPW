@@ -372,6 +372,8 @@ h.navbar-brand {
   border-radius: 50%;
   align-items: center;
 }
+
+
 #espaciador {
 width: 1rem;
 
@@ -381,3 +383,6 @@ width: 1rem;
   position: absolute;
   top: 25px;
 }
+
+
+
