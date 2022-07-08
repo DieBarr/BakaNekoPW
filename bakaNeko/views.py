@@ -16,9 +16,13 @@ def login_view(request):
         password = login_form.cleaned_data.get('contrasenia')
         user = authenticate(request, email=email, password=password)
         if user is not None:
-            login(request, user)
-            messages.success(request, 'Has iniciado sesion correctamente')
-            return redirect('index')
+            if user.rol_id == 3:
+                messages.error(request, 'Lo sentimos, estas baneado')
+                return redirect('registro')
+            else:
+                login(request, user)
+                messages.success(request, 'Has iniciado sesion correctamente')
+                return redirect('index')
         else:
             messages.error(request, "Error: Usuario o contraseña inválidos (╬ Ò﹏Ó)!")
             return redirect('registro')
@@ -129,6 +133,21 @@ def borrarPost(request, id):
     post = Post.objects.get(idPost = id)
     post.delete()
     return redirect('index')
+
+def banearUser(request, id, tipo, url):
+    if tipo == 1:
+        rolban = Rol.objects.get(idRol = 3)
+        usuario = get_user_model().objects.get(id = id)
+        usuario.rol = rolban
+        usuario.save()
+        return redirect(url)
+    else:
+        rol = Rol.objects.get(idRol = 1)
+        usuario = get_user_model().objects.get(id = id)
+        usuario.rol = rol
+        usuario.save()
+        return redirect(url)
+
 def registrarComentario(request, id, user):
     desc_c = request.POST['comment']
     fecha_c = datetime.date.today()

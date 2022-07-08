@@ -23,7 +23,11 @@
                     <td>{{ u.email }}</td>
                     <td>{{ u.register_date }}</td>
                     <td>{{ u.is_staff }}</td>
-                    <td><a href="" class="btn btn-danger">Banear</a></td>
+                    {% if u.rol_id != 3 %}
+                        <td><a href="{% url 'banearUser' u.id 1 'listaUsers' %}" class="btn btn-danger">Banear</a></td>
+                    {% else %}
+                        <td><a href="{% url 'banearUser' u.id 2 'listaUsers' %}" class="btn btn-danger">Desbanear</a></td>
+                    {% endif %}
                 </tr>
             
                 {% endfor %}
